@@ -1,6 +1,6 @@
 let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
 let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
-let paedagoger = new Array(10); // indeholder pædagog-objekter - max 10 da der kun er plads til 10 pædagoger
+let paedagoger = []; // indeholder pædagog-objekter - max 10 da der kun er plads til 10 pædagoger
 
 // vælger en pædagog
 function placerePaedagog(element) {
@@ -124,36 +124,54 @@ class Paedagog {
     }
 }
 
-// pædagog-objekter oprettes og tilføjes til array'et
-function opretPaedagoger(){
-    let p;
-    p = new Paedagog("Hans Jensen", "(HJ)");
-    addPaedagog(p);
-    p = new Paedagog("Karl Rasmussen", "(KR)");
-    addPaedagog(p);
-    p = new Paedagog("Tom Larsen", "(TL)");
-    addPaedagog(p);
-    p = new Paedagog("Rasmus Poulsen", "(RP)");
-    addPaedagog(p);
-    p = new Paedagog("Lars Larsen", "(LL)");
-    addPaedagog(p);
-    p = new Paedagog("Michael Rasmussen", "(MR)");
-    addPaedagog(p);
-    p = new Paedagog("Peter Holm", "(PH)");
-    addPaedagog(p);
-    p = new Paedagog("Christian Kjeldsen", "(CK)");
-    addPaedagog(p);
-    p = new Paedagog("Søren Madsen", "(SM)");
-    addPaedagog(p);
-    p = new Paedagog("Erik Kjærlund", "(EK)");
-    addPaedagog(p);
+// pædagog-objekter oprettes og tilføjes til array'et - pædagogerne hentes fra databasen
+function hentPaedagoger(){
+
+    let usersUrl = "/paedagog/paedagoger";
+
+    fetch(usersUrl)
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => {
+
+            // henter pædagogernes navne & initialer fra databasen, opretter dem som objekter, tilføjer dem til paedagoger arrayet -
+            // samt tilføjer dem til pædagog-felterne
+            for(let i = 0; i < resultat.length; i++){
+                let element = document.querySelector("#grid-paedagog" +(i+1));
+
+                let p = new Paedagog(resultat[i].navn, resultat[i].initialer);
+                paedagoger.push(p);
+                element.children[0].innerHTML = resultat[i].navn;
+                element.children[2].innerHTML = resultat[i].initialer;
+            }
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-// tilføjer pædagogernes navne & initialer til pædagog-felterne
-function addPaedagog(paedagog) {
-    for(let i = 0; i < paedagoger.length; i++){
-        let felt = document.querySelector("#grid-paedagog" +(i+1));
-        felt.getElementsByClassName('navn')[0].innerHTML = paedagog.getInitials();
-        felt.getElementsByClassName('initialer')[0].innerHTML = paedagog.getName();
-    }
-}
+// henter pædagogerne fra databasen
+// async function hentPaedagoger() {
+//     try {
+//         const [template, response] =
+//             await Promise.all([fetch('/paedagoger.hbs'), fetch("/paedagog/paedagoger")]);
+//         const templateText = await template.text();
+//         const paedagoger = await response.json();
+//         const compiledTemplate = Handlebars.compile(templateText);
+//         document.querySelector("body").innerHTML = document.querySelector("body").innerHTML + compiledTemplate({paedagoger});
+//
+//     } catch (fejl) {
+//         console.log('Fejl: ' + fejl);
+//     }
+// }
+//
+// Handlebars.registerHelper("inc", function(value, options)
+// {
+//     return parseInt(value) + 1;
+// });
+
+// hentPaedagoger();
+
+hentPaedagoger();
