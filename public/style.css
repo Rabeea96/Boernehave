@@ -394,19 +394,57 @@
 }
 
 /* fokus-punkter */
-#grid-fokuspunkter {
+#grid-fokuspunkter-og-blæksprutte {
     grid-area: fokuspunkter;
+}
+
+#grid-fokuspunkter {
+    height: 128px;
 }
 
 #grid-fokuspunkter h3 {
     text-align: center;
 }
 
-#grid-fokuspunkter p{
+/*#grid-fokuspunkter p{
     overflow: auto;
     width:420px;
     height: 75px;
     margin-left: 20px;
+}*/
+#fokuspunkt1 {
+    line-height: 5px;
+}
+#fokuspunkt2 {
+    line-height: 5px;
+}
+#fokuspunkt3 {
+    line-height: 5px;
+}
+
+#grid-blæksprutte {
+    height: 22px;
+    text-align: center;
+}
+
+#blæksprutte-tekstfelt {
+    float: left;
+    width: 33.3%;
+    height: 22px;
+    border-right: 1px solid black;
+}
+
+#blæksprutte-boks {
+    float: left;
+    height: 22px;
+    width: 33.3%;
+    border-right: 1px solid black;
+}
+
+#ændre-dagslan {
+    float: left;
+    height: 22px;
+    width: 33.3%;
 }
 
 /* tomt mellemrum */
