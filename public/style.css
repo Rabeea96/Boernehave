@@ -149,6 +149,12 @@
     background-color: white;
 }
 
+/*buttons i blækspruttens vindue*/
+.knapper {
+    background-color: white;
+    text-align: center;
+}
+
 #grid-lokale1-tidspunkt1 {
     grid-area: lokale1-tidspunkt1;
 }
@@ -399,7 +405,7 @@
 }
 
 #grid-fokuspunkter {
-    height: 128px;
+    height: 125px;
 }
 
 #grid-fokuspunkter h3 {
@@ -423,30 +429,56 @@
 }
 
 #grid-blæksprutte {
-    height: 22px;
+    height: 25px;
     text-align: center;
 }
 
 #blæksprutte-tekstfelt {
     float: left;
     width: 33.3%;
-    height: 22px;
+    height: 25px;
     border-right: 1px solid black;
 }
 
 #blæksprutte-boks {
     float: left;
-    height: 22px;
+    height: 25px;
     width: 33.3%;
     border-right: 1px solid black;
 }
 
 #ændre-dagslan {
     float: left;
-    height: 22px;
+    height: 25px;
     width: 33.3%;
 }
 
+/*Blæksprutte vindue, kanpper, fokuspunkter er top-left, ændre evt. senere*/
+#grid-knapper {
+    grid-area: fokuspunkter;
+    display: grid;
+    grid-template-areas:
+            "gem_dagsplan tilbage_dagsplan"
+            "åben_rum luk_rum"
+;
+    grid-auto-columns: 1fr;
+}
+
+#gem-dagsplan {
+    grid-area: gem_dagsplan;
+}
+
+#tilbage-dagsplan {
+    grid-area: tilbage_dagsplan;
+}
+
+#luk-rum {
+    grid-area: luk_rum;
+}
+
+#åben-rum {
+    grid-area: åben_rum;
+}
 /* tomt mellemrum */
 #mellemrum {
     grid-area: mellemrum;
