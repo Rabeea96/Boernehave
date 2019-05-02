@@ -1,6 +1,5 @@
 let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
 let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
-let paedagoger = []; // indeholder pædagog-objekter - max 10 da der kun er plads til 10 pædagoger
 
 // vælger en pædagog
 function placerePaedagog(element) {
@@ -109,21 +108,6 @@ function fjernPaedagog(parent, element) {
     parent.classList.remove(parent.classList.item(parent.classList.length-1));
 }
 
-// pædagog klasse
-class Paedagog {
-    constructor(name, initials) {
-        this.name = name;
-        this.initials = initials;
-    }
-
-    getName() {
-        return this.name;
-    }
-    getInitials() {
-        return this.initials
-    }
-}
-
 // pædagog-objekter oprettes og tilføjes til array'et - pædagogerne hentes fra databasen
 function hentPaedagoger(){
 
@@ -142,9 +126,6 @@ function hentPaedagoger(){
             // samt tilføjer dem til pædagog-felterne
             for(let i = 0; i < resultat.length; i++){
                 let element = document.querySelector("#grid-paedagog" +(i+1));
-
-                let p = new Paedagog(resultat[i].navn, resultat[i].initialer);
-                paedagoger.push(p);
                 element.children[0].innerHTML = resultat[i].navn;
                 element.children[2].innerHTML = resultat[i].initialer;
             }
@@ -173,5 +154,60 @@ function hentPaedagoger(){
 // });
 
 // hentPaedagoger();
+
+function visForside() {
+    window.location = "/";
+}
+
+function visBlaeksprutteVindue() {
+    window.location = "/blaeksprutte";
+}
+
+let initialer_blaeksprutte = "";
+let blaeksprutteFeltClicked = false;
+
+function vaelgeBlaeksprutte() {
+    let paedagoger = document.querySelectorAll(".paedagoger");
+    for(let i = 0; i < paedagoger.length; i++) {
+        paedagoger[i].style.opacity = "0.5";
+    }
+    blaeksprutteFeltClicked = true;
+}
+
+function blaeksprutteValgt(element) {
+    if(blaeksprutteFeltClicked == true) {
+        let paedagoger = document.querySelectorAll(".paedagoger");
+        for(let i = 0; i < paedagoger.length; i++) {
+            paedagoger[i].style.opacity = "1";
+        }
+        initialer_blaeksprutte = element.children[2].innerHTML;
+
+        let blaeksprutte = document.querySelector("#blaeksprutte-felt");
+        blaeksprutte.innerHTML = initialer_blaeksprutte;
+
+        blaeksprutteFeltClicked = false;
+
+        initialer_blaeksprutte = "";
+    }
+}
+
+// onclick på pædagogerne - bruges til at ændre blæksprutte
+// function blaeksprutteButton() {
+//     let pedabuttons = document.getElementsByClassName("paedagoger");
+//     for (let i = 0; i <pedabuttons.length; i++) {
+//         pedabuttons[i].onclick = function() {
+//             aendreBlaeksprutte(this);
+//         }
+//     }
+// }
+//
+// function aendreBlaeksprutte(field) {
+//     document.getElementById("blaeksprutte-boks").innerText = field.innerText;
+//     let pedabuttons = document.getElementsByClassName("paedagoger");
+//     for (let i = 0; i <pedabuttons.length; i++) {
+//         pedabuttons[i].onclick = null;
+//         pedabuttons[i].style.boxShadow = null;
+//     }
+// }
 
 hentPaedagoger();
