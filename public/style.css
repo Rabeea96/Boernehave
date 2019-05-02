@@ -8,8 +8,8 @@
     background-color: lightgrey;
     display: grid;
     grid-template-areas:
-            "fokuspunkter fokuspunkter fokuspunkter fokuspunkter paedagog1 paedagog2 paedagog3 paedagog4 paedagog5"
-            "fokuspunkter fokuspunkter fokuspunkter fokuspunkter paedagog6 paedagog7 paedagog8 paedagog9 paedagog10"
+            "top_left top_left top_left top_left paedagog1 paedagog2 paedagog3 paedagog4 paedagog5"
+            "top_left top_left top_left top_left paedagog6 paedagog7 paedagog8 paedagog9 paedagog10"
             "mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum"
             "dags-plan stue multirum vaerksted legerum krogen legeplads pause vuggestue"
             "ni lokale1-tidspunkt1 lokale2-tidspunkt1 lokale3-tidspunkt1 lokale4-tidspunkt1 lokale5-tidspunkt1 lokale6-tidspunkt1 lokale7-tidspunkt1 lokale8-tidspunkt1"
@@ -400,16 +400,37 @@
 }
 
 /* fokus-punkter */
-#grid-fokuspunkter-og-blæksprutte {
-    grid-area: fokuspunkter;
+#grid-fokuspunkter-og-blaeksprutte {
+    grid-area: top_left;
+    display: grid;
+    grid-template-areas:
+            "fokuspunkter fokuspunkter fokuspunkter"
+            "blaeksprutte_tekst blaeksprutte_navn aendre_plan";
+    grid-auto-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#blaeksprutte-tekstfelt {
+    grid-area: blaeksprutte_tekst;
+    border-right: 1px solid black;
+}
+
+#blaeksprutte-boks {
+    grid-area: blaeksprutte_navn;
+    border-right: 1px solid black;
+}
+
+#aendre-dagslan {
+    grid-area: aendre_plan;
 }
 
 #grid-fokuspunkter {
-    height: 125px;
+    grid-area: fokuspunkter;
 }
 
 #grid-fokuspunkter h3 {
     text-align: center;
+    line-height: 5px;
 }
 
 /*#grid-fokuspunkter p{
@@ -428,39 +449,13 @@
     line-height: 5px;
 }
 
-#grid-blæksprutte {
-    height: 25px;
-    text-align: center;
-}
-
-#blæksprutte-tekstfelt {
-    float: left;
-    width: 33.3%;
-    height: 25px;
-    border-right: 1px solid black;
-}
-
-#blæksprutte-boks {
-    float: left;
-    height: 25px;
-    width: 33.3%;
-    border-right: 1px solid black;
-}
-
-#ændre-dagslan {
-    float: left;
-    height: 25px;
-    width: 33.3%;
-}
-
 /*Blæksprutte vindue, kanpper, fokuspunkter er top-left, ændre evt. senere*/
 #grid-knapper {
-    grid-area: fokuspunkter;
+    grid-area: top_left;
     display: grid;
     grid-template-areas:
             "gem_dagsplan tilbage_dagsplan"
-            "åben_rum luk_rum"
-;
+            "aaben_rum luk_rum";
     grid-auto-columns: 1fr;
 }
 
@@ -476,8 +471,8 @@
     grid-area: luk_rum;
 }
 
-#åben-rum {
-    grid-area: åben_rum;
+#aaben-rum {
+    grid-area: aaben_rum;
 }
 /* tomt mellemrum */
 #mellemrum {
