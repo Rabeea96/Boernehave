@@ -1,0 +1,12 @@
+{
+  "name": "Semester-projektet",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.4",
+    "mongoose": "^5.5.4",
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.4.1",
+    "path": "^0.12.7"
+  }
+}

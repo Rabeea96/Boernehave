@@ -1,19 +1,11 @@
 let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
 let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
-let åbenLuk = false; // Får en værdi alt efter om åben rum eller luk rum knap er valgt
 let id_blaeksprutte;
 let initialer_blaeksprutte = "";
 let blaeksprutteFeltClicked = false;
 
 // vælger en pædagog
 function placerePaedagog(element) {
-
-    //Hvis en åben/luk knap er valgt
-    if (åbenLuk) {
-        åbenLuk = false;
-        document.getElementById('aaben-rum').style.border = '1px black solid';
-        document.getElementById('luk-rum').style.border = '1px black solid';
-    }
 
     // hvis der allerede er valgt en pædagog - skal den deSelectes
     if(paedagogValgt != "") {
@@ -27,112 +19,49 @@ function placerePaedagog(element) {
     element.style.opacity = "1";
 }
 
-function åbenLukKnapper(id) {
-
-    if (initialer != "") {
-        initialer = "";
-        paedagogValgt.style.opacity = '0.5';
-        paedagogValgt = "";
-
-    }
-
-    //Hvis åben eller luk ikke er valgt
-    if (åbenLuk === false) {
-        document.getElementById(id).style.border = '2px red solid';
-        åbenLuk = id;
-
-        //Hvis åben eller luk er valgt
-    } else {
-        if (åbenLuk === id) {
-            document.getElementById(id).style.border = '1px black solid';
-            åbenLuk = false;
-        } else {
-            document.getElementById(id).style.border = '2px red solid';
-            åbenLuk = id;
-            if (id === "aaben-rum") {
-                document.getElementById('luk-rum').style.border = '1px black solid';
-            } else {
-                document.getElementById('aaben-rum').style.border = '1px black solid';
-            }
-        }
-    }
-
-}
-
-function lukLokale(element) {
-
-    // Hvis der er pædagog i feltet
-    if (!(element.children[0].innerHTML === "" && element.children[1].innerHTML === "" && element.children[2].innerHTML === "")) {
-
-    } else {
-        // Hvis åben-rum eller luk-rum funktion er aktiveret/under brug
-        if (åbenLuk === "aaben-rum") {
-            element.classList.remove('lukketRum');
-        } else {
-            element.classList.add('lukketRum');
-        }
-    }
-}
-
 // placerer pædagogen på et felt
 function paedagogPlaceret(element) {
-    //Hvis åben/luk ikke er valgt
-    if (åbenLuk === false) {
+    // fjern-knap
+    let fjernKnap = document.createElement("button");
+    fjernKnap.innerHTML = "Fjern";
 
-        if (element.classList.contains('lukketRum')) {
-            // Do nothing
+    // denne div-element bruges til at undgå float problemerne
+    let divClear = document.createElement("div");
+    divClear.style.clear = "both";
+    divClear.style.height = "0 px";
+    fjernKnap.style.float = "right";
+    fjernKnap.onclick = function() {fjernPaedagog(this.parentElement, this)};
 
-        } else {
+    // gemmer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
+    let number = /\d+/.exec(paedagogValgt.id); // denne regex-expression gemmer tallet fra id'et (er id'et fx paedagog7 - gemmer den 7-tallet)
+    let index = number-1;
+    let className = "paedagogFarve" + (index+1); // i CSS-filen har pædagogernes felt-farver hver især en klasse (fx paedagogFarve7)
 
+    // de 3 pædagoger-pladser som er i hvert felt
+    let paedagog1 = element.children[0];
+    let paedagog2 = element.children[1];
+    let paedagog3 = element.children[2];
 
+    // hvis pædagogen ikke allerede er tilføjet til denne felt i kalenderen - tjekker den om en af de 3 pædagogpladser i feltet er tomt
+    if(!paedagog1.textContent.includes(initialer) && !paedagog2.textContent.includes(initialer) && !paedagog3.textContent.includes(initialer)) {
+        // hvis første pædagog-plads er tomt og en pædagog er valgt - tilføjes pædagogen til feltet
+        if (paedagog1.innerHTML == "" && initialer != "") {
+            paedagog1.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;"; // initialerne for den valgte pædagog tilføjes til feltet
+            paedagog1.appendChild(fjernKnap);
+            paedagog1.appendChild(divClear);
+            paedagog1.classList.add(className); // tilføjer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
 
-            // fjern-knap
-            let fjernKnap = document.createElement("button");
-            fjernKnap.innerHTML = "Fjern";
+        } else if (paedagog2.innerHTML == "" && initialer != "") {
+            paedagog2.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
+            paedagog2.appendChild(fjernKnap);
+            paedagog2.appendChild(divClear);
+            paedagog2.classList.add(className);
 
-            // denne div-element bruges til at undgå float problemerne
-            let divClear = document.createElement("div");
-            divClear.style.clear = "both";
-            divClear.style.height = "0 px";
-            fjernKnap.style.float = "right";
-            fjernKnap.onclick = function () {
-                fjernPaedagog(this.parentElement, this)
-            };
-
-            // gemmer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
-            let number = /\d+/.exec(paedagogValgt.id); // denne regex-expression gemmer tallet fra id'et (er id'et fx paedagog7 - gemmer den 7-tallet)
-            let index = number - 1;
-            let className = "paedagogFarve" + (index + 1); // i CSS-filen har pædagogernes felt-farver hver især en klasse (fx paedagogFarve7)
-
-            // de 3 pædagoger-pladser som er i hvert felt
-            let paedagog1 = element.children[0];
-            let paedagog2 = element.children[1];
-            let paedagog3 = element.children[2];
-
-            // hvis pædagogen ikke allerede er tilføjet til denne felt i kalenderen - tjekker den om en af de 3 pædagogpladser i feltet er tomt
-            if (!paedagog1.textContent.includes(initialer) && !paedagog2.textContent.includes(initialer) && !paedagog3.textContent.includes(initialer)) {
-                // hvis første pædagog-plads er tomt og en pædagog er valgt - tilføjes pædagogen til feltet
-                if (paedagog1.innerHTML == "" && initialer != "") {
-                    paedagog1.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;"; // initialerne for den valgte pædagog tilføjes til feltet
-                    paedagog1.appendChild(fjernKnap);
-                    paedagog1.appendChild(divClear);
-                    paedagog1.classList.add(className); // tilføjer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
-
-                } else if (paedagog2.innerHTML == "" && initialer != "") {
-                    paedagog2.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
-                    paedagog2.appendChild(fjernKnap);
-                    paedagog2.appendChild(divClear);
-                    paedagog2.classList.add(className);
-
-                } else if (paedagog3.innerHTML == "" && initialer != "") {
-                    paedagog3.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
-                    paedagog3.appendChild(fjernKnap);
-                    paedagog3.classList.add(className);
-                }
-            }
+        } else if (paedagog3.innerHTML == "" && initialer != "") {
+            paedagog3.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
+            paedagog3.appendChild(fjernKnap);
+            paedagog3.classList.add(className);
         }
-    } else {
-        lukLokale(element);
     }
 }
 
