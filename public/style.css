@@ -130,10 +130,6 @@
     grid-area: paedagog10;
 }
 
-.paedagoger {
-    background-color: green;
-}
-
 /* viser grid lines */
 .punkter-med-kant {
     border: 1px black solid;
@@ -449,6 +445,7 @@
     height: 75px;
     margin-left: 20px;
 }*/
+
 #fokuspunkt1 {
     line-height: 5px;
 }

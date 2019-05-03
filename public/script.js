@@ -1,5 +1,8 @@
 let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
 let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
+let id_blaeksprutte;
+let initialer_blaeksprutte = "";
+let blaeksprutteFeltClicked = false;
 
 // vælger en pædagog
 function placerePaedagog(element) {
@@ -111,9 +114,9 @@ function fjernPaedagog(parent, element) {
 // pædagog-objekter oprettes og tilføjes til array'et - pædagogerne hentes fra databasen
 function hentPaedagoger(){
 
-    let usersUrl = "/paedagog/paedagoger";
+    let url = "/paedagog/paedagoger";
 
-    fetch(usersUrl)
+    fetch(url)
         .then(response => {
             if (response.status >= 400)
                 throw new Error(response.status);
@@ -133,28 +136,6 @@ function hentPaedagoger(){
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-// henter pædagogerne fra databasen
-// async function hentPaedagoger() {
-//     try {
-//         const [template, response] =
-//             await Promise.all([fetch('/paedagoger.hbs'), fetch("/paedagog/paedagoger")]);
-//         const templateText = await template.text();
-//         const paedagoger = await response.json();
-//         const compiledTemplate = Handlebars.compile(templateText);
-//         document.querySelector("body").innerHTML = document.querySelector("body").innerHTML + compiledTemplate({paedagoger});
-//
-//     } catch (fejl) {
-//         console.log('Fejl: ' + fejl);
-//     }
-// }
-//
-// Handlebars.registerHelper("inc", function(value, options)
-// {
-//     return parseInt(value) + 1;
-// });
-
-// hentPaedagoger();
-
 function visForside() {
     window.location = "/";
 }
@@ -162,9 +143,6 @@ function visForside() {
 function visBlaeksprutteVindue() {
     window.location = "/blaeksprutte";
 }
-
-let initialer_blaeksprutte = "";
-let blaeksprutteFeltClicked = false;
 
 function vaelgeBlaeksprutte() {
     let paedagoger = document.querySelectorAll(".paedagoger");
@@ -180,10 +158,20 @@ function blaeksprutteValgt(element) {
         for(let i = 0; i < paedagoger.length; i++) {
             paedagoger[i].style.opacity = "1";
         }
+        let navn_blaeksprutte = element.children[0].innerHTML;
         initialer_blaeksprutte = element.children[2].innerHTML;
 
         let blaeksprutte = document.querySelector("#blaeksprutte-felt");
         blaeksprutte.innerHTML = initialer_blaeksprutte;
+
+        // hvis der ingen blæksprutte er i databasen - så oprettes en blæksprutte i databasen
+        if(id_blaeksprutte == "" || id_blaeksprutte == undefined) {
+            postBlaeksprutte(navn_blaeksprutte, initialer_blaeksprutte);
+
+            // ellers så opdateres blæksprutten i databasen
+        } else {
+            putBlaeksprutte(id_blaeksprutte, navn_blaeksprutte, initialer_blaeksprutte);
+        }
 
         blaeksprutteFeltClicked = false;
 
@@ -191,23 +179,101 @@ function blaeksprutteValgt(element) {
     }
 }
 
-// onclick på pædagogerne - bruges til at ændre blæksprutte
-// function blaeksprutteButton() {
-//     let pedabuttons = document.getElementsByClassName("paedagoger");
-//     for (let i = 0; i <pedabuttons.length; i++) {
-//         pedabuttons[i].onclick = function() {
-//             aendreBlaeksprutte(this);
-//         }
-//     }
-// }
-//
-// function aendreBlaeksprutte(field) {
-//     document.getElementById("blaeksprutte-boks").innerText = field.innerText;
-//     let pedabuttons = document.getElementsByClassName("paedagoger");
-//     for (let i = 0; i <pedabuttons.length; i++) {
-//         pedabuttons[i].onclick = null;
-//         pedabuttons[i].style.boxShadow = null;
-//     }
-// }
+function blaeksprutteId() {
+    let usersUrl = "/blaeksprutte/valgt-blaeksprutte";
+
+    fetch(usersUrl)
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => {
+            if(resultat.length != 0) {
+                id_blaeksprutte = resultat[0]._id;
+            }
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
+
+function hentBlaeksprutte() {
+    let blaeksprutte = document.querySelector("#blaeksprutte-felt");
+    let url = "/blaeksprutte/valgt-blaeksprutte";
+    fetch(url)
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => {
+            if(resultat.length != 0) {
+                if(blaeksprutte != null) {
+                    blaeksprutte.innerHTML = resultat[0].initialer;
+                }
+            }
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
+
+function postBlaeksprutte(navn, initialer) {
+
+    let url = "/blaeksprutte";
+    let data = {navn: navn, initialer: initialer};
+
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'}
+    })
+        .then(resultat => {
+            if (resultat.status >= 400)
+                throw new Error(resultat.status);
+            else
+                return resultat.json();
+        })
+        .then(resultat => console.log(`Resultat: %o`, resultat))
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
+
+function putBlaeksprutte(id, navn, initialer) {
+    let url = '/blaeksprutte/valgt-blaeksprutte';
+    let data = {id: id, navn: navn, initialer: initialer };
+
+    fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => console.log(`Resultat: %o`, resultat))
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
 
 hentPaedagoger();
+blaeksprutteId();
+hentBlaeksprutte();
+
+function myFunction() {
+    let url = "/blaeksprutte/rum";
+
+    fetch(url)
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => {
+            console.log(resultat[1].paedagoger[0]);
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
+
+myFunction();
