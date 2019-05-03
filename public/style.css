@@ -395,7 +395,7 @@
     grid-area: lokale8-tidspunkt7;
 }
 
-/* fokus-punkter */
+/* top_left i index-vinduet */
 #grid-fokuspunkter-og-blaeksprutte {
     grid-area: top_left;
     display: grid;
@@ -403,17 +403,26 @@
             "fokuspunkter fokuspunkter fokuspunkter"
             "blaeksprutte_tekst blaeksprutte_navn aendre_plan";
     grid-auto-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1.4fr 0.6fr;
 }
 
 #blaeksprutte-tekstfelt {
     grid-area: blaeksprutte_tekst;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#blaeksprutte-tekstfelt div {
     margin-left: 50px;
+    margin-top: 12px;
 }
 
 #blaeksprutte-boks {
     grid-area: blaeksprutte_navn;
     border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 #blaeksprutte-felt {
@@ -426,8 +435,12 @@
     margin-top: 10px;
 }
 
-#aendre-dagslan {
+#aendre-dagsplan {
     grid-area: aendre_plan;
+}
+
+#aendre-dagsplan div {
+    margin-top: 12px;
 }
 
 #grid-fokuspunkter {
@@ -439,24 +452,14 @@
     line-height: 5px;
 }
 
-/*#grid-fokuspunkter p{
+#grid-fokuspunkter div {
     overflow: auto;
     width:420px;
-    height: 75px;
+    height: 20px;
     margin-left: 20px;
-}*/
-
-#fokuspunkt1 {
-    line-height: 5px;
-}
-#fokuspunkt2 {
-    line-height: 5px;
-}
-#fokuspunkt3 {
-    line-height: 5px;
 }
 
-/*Blæksprutte vindue, kanpper, fokuspunkter er top-left, ændre evt. senere*/
+/* top_left i blæksprutte-vinduet */
 #grid-knapper {
     grid-area: top_left;
     display: grid;
