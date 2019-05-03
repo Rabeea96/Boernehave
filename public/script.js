@@ -111,7 +111,7 @@ function fjernPaedagog(parent, element) {
     parent.classList.remove(parent.classList.item(parent.classList.length-1));
 }
 
-// pædagog-objekter oprettes og tilføjes til array'et - pædagogerne hentes fra databasen
+// pædagogerne hentes fra databasen
 function hentPaedagoger(){
 
     let url = "/paedagog/paedagoger";
@@ -256,24 +256,45 @@ function putBlaeksprutte(id, navn, initialer) {
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-hentPaedagoger();
-blaeksprutteId();
-hentBlaeksprutte();
-
-function myFunction() {
+function postRum(paedagogInitArray, index, dato) {
     let url = "/blaeksprutte/rum";
+    let data = { paedagogInitialer: paedagogInitArray, index: index, dato: dato };
 
-    fetch(url)
-        .then(response => {
-            if (response.status >= 400)
-                throw new Error(response.status);
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(resultat => {
+            if (resultat.status >= 400)
+                throw new Error(resultat.status);
             else
-                return response.json();
+                return resultat.json();
         })
         .then(resultat => {
-            console.log(resultat[1].paedagoger[0]);
+            console.log(`Resultat: %o`, resultat)
         })
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-myFunction();
+hentPaedagoger();
+blaeksprutteId();
+hentBlaeksprutte();
+
+// function myFunction() {
+//     let url = "/blaeksprutte/rum";
+//
+//     fetch(url)
+//         .then(response => {
+//             if (response.status >= 400)
+//                 throw new Error(response.status);
+//             else
+//                 return response.json();
+//         })
+//         .then(resultat => {
+//             console.log(resultat[1].paedagoger[0]);
+//         })
+//         .catch(fejl => console.log('Fejl: ' + fejl));
+// }
+//
+// myFunction();

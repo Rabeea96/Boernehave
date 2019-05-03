@@ -34,8 +34,19 @@ router.get('/rum', (request, response) => {
 });
 
 router.post('/rum', (request, response) => {
-    controller.createRum(request.body.index, request.body.dato);
-    response.send(request.body);
+    let rum = undefined;
+    controller.createRum(request.body.index, request.body.dato)
+        .then(rumOprettet => {
+            rum = rumOprettet;
+            return rumOprettet;
+        })
+        .then(rummet => {
+            for(let i = 0; i < request.body.paedagogInitialer.length; i++) {
+                controller.addPaedagogTilRum(request.body.paedagogInitialer[i], request.body.index);
+            }
+            response.send(request.body);
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
 });
 
 router.put('/rum', (request, response) => {
