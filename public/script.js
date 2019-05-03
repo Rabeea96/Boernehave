@@ -83,9 +83,6 @@ function paedagogPlaceret(element) {
             // Do nothing
 
         } else {
-
-
-
             // fjern-knap
             let fjernKnap = document.createElement("button");
             fjernKnap.innerHTML = "Fjern";
