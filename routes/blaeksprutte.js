@@ -33,24 +33,19 @@ router.get('/rum', (request, response) => {
         .catch(fejl => console.log('Fejl: ' + fejl));
 });
 
-router.post('/rum', (request, response) => {
-    let rum = undefined;
-    controller.createRum(request.body.index, request.body.dato)
-        .then(rumOprettet => {
-            rum = rumOprettet;
-            return rumOprettet;
-        })
-        .then(rummet => {
-            for(let i = 0; i < request.body.paedagogInitialer.length; i++) {
-                controller.addPaedagogTilRum(request.body.paedagogInitialer[i], request.body.index);
-            }
-            response.send(request.body);
-        })
+router.get('/rum/dagsdato', (request, response) => {
+    controller.getRum_dagsdato()
+        .then(val => response.json(val))
         .catch(fejl => console.log('Fejl: ' + fejl));
 });
 
-router.put('/rum', (request, response) => {
-    controller.updateRum(request.body.id, request.body.index, request.body.dato);
+router.post('/rum', (request, response) => {
+    controller.createRum(request.body.paedagogInitialer, request.body.paedagogClassArray, request.body.index, request.body.dato, request.body.aaben);
+    response.send(request.body);
+});
+
+router.put('/rum/dagsdato', (request, response) => {
+    controller.updateRum(request.body.id, request.body.paedagogInitialer, request.body.paedagogClassArray, request.body.index, request.body.dato, request.body.aaben);
     response.send(request.body);
 });
 

@@ -8,19 +8,20 @@
     background-color: lightgrey;
     display: grid;
     grid-template-areas:
+            "dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato"
             "top_left top_left top_left top_left paedagog1 paedagog2 paedagog3 paedagog4 paedagog5"
             "top_left top_left top_left top_left paedagog6 paedagog7 paedagog8 paedagog9 paedagog10"
             "mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum"
             "dags-plan stue multirum vaerksted legerum krogen legeplads pause vuggestue"
             "ni lokale1-tidspunkt1 lokale2-tidspunkt1 lokale3-tidspunkt1 lokale4-tidspunkt1 lokale5-tidspunkt1 lokale6-tidspunkt1 lokale7-tidspunkt1 lokale8-tidspunkt1"
-            "ti lokale1-tidspunkt2 lokale1-tidspunkt2 lokale1-tidspunkt2 lokale4-tidspunkt2 lokale7-tidspunkt2 lokale7-tidspunkt2 lokale7-tidspunkt2 lokale8-tidspunkt2"
+            "ti lokale1-tidspunkt2 lokale1-tidspunkt2 lokale1-tidspunkt2 morgensamling lokale7-tidspunkt2 lokale7-tidspunkt2 lokale7-tidspunkt2 lokale8-tidspunkt2"
             "elleve lokale1-tidspunkt3 lokale2-tidspunkt3 lokale3-tidspunkt3 lokale4-tidspunkt3 lokale5-tidspunkt3 lokale6-tidspunkt3 lokale7-tidspunkt3 lokale8-tidspunkt3"
             "tolv lokale1-tidspunkt4 lokale2-tidspunkt4 lokale3-tidspunkt4 lokale4-tidspunkt4 lokale5-tidspunkt4 lokale6-tidspunkt4 lokale7-tidspunkt4 lokale8-tidspunkt4"
             "tolv-tredive lokale1-tidspunkt5 lokale2-tidspunkt5 lokale3-tidspunkt5 lokale4-tidspunkt5 lokale5-tidspunkt5 lokale6-tidspunkt5 lokale7-tidspunkt5 lokale8-tidspunkt5"
             "tretten lokale1-tidspunkt6 lokale2-tidspunkt6 lokale3-tidspunkt6 lokale4-tidspunkt6 lokale5-tidspunkt6 lokale6-tidspunkt6 lokale7-tidspunkt6 lokale8-tidspunkt6"
             "fjorten lokale1-tidspunkt7 lokale2-tidspunkt7 lokale3-tidspunkt7 lokale4-tidspunkt7 lokale5-tidspunkt7 lokale6-tidspunkt7 lokale7-tidspunkt7 lokale8-tidspunkt7";
     grid-auto-columns: 1fr; /* gør at kolonnerne får den samme bredde */
-    grid-template-rows: 1fr 1fr 0.5fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.4fr 1fr 1fr 0.1fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 /* overskrifter */
@@ -184,18 +185,18 @@
 }
 
 /* lokale og tidspunkt- felter for række 2 */
-#grid-lokale1-tidspunkt2 {
+#koekken {
     grid-area: lokale1-tidspunkt2;
     border-right: none;
 }
 
-#grid-lokale4-tidspunkt2 {
-    grid-area: lokale4-tidspunkt2;
+#grid-morgensamling {
+    grid-area: morgensamling;
     border-left: none;
     border-right: none;
 }
 
-#grid-lokale7-tidspunkt2 {
+#badevaerelse {
     grid-area: lokale7-tidspunkt2;
     border-left: none;
 }
@@ -204,7 +205,7 @@
     grid-area: lokale8-tidspunkt2;
 }
 
-#koekken {
+#grid-lokale1-tidspunkt2 {
     background-color: white;
     border:1px solid black;
     width:109px;
@@ -217,7 +218,7 @@
     margin-left:80px;
 }
 
-#badevaerelse {
+#grid-lokale7-tidspunkt2 {
     background-color: white;
     border:1px solid black;
     width:109px;
@@ -488,7 +489,7 @@
 #mellemrum {
     grid-area: mellemrum;
     border: 1px black solid;
-    background-color: black;
+    background-color: darkgrey;
 }
 
 /* pædagog inde i felterne */
@@ -549,4 +550,12 @@ button {
 
 .lukketRum {
     background-color: lightgrey;
+}
+
+.usynlig {
+    display: none;
+}
+
+#grid-dags-dato {
+    grid-area: dags-dato;
 }

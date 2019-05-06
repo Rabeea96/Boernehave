@@ -37,13 +37,25 @@ exports.getRum = function() {
     return Rum.find().exec();
 }
 
-exports.createRum = function(index, dato) {
-    const rumCreated = new Rum({index: index, dato: dato});
+exports.getRum_dagsdato = function() {
+
+    // henter dato i formatet DD-MM-ÅÅÅÅ
+    let dato = new Date();
+    let datoString =
+        ("0" + dato.getUTCDate()).slice(-2) + "-" +
+        ("0" + (dato.getUTCMonth()+1)).slice(-2) + "-" +
+        dato.getUTCFullYear();
+
+    return Rum.find({dato: datoString}).sort({ index: +1 }).collation({locale: "en_US", numericOrdering: true}).exec();
+}
+
+exports.createRum = function(paedagogInitialer, paedagogClasses, index, dato, aaben) {
+    const rumCreated = new Rum({paedagogInitialer: paedagogInitialer, paedagogClasses: paedagogClasses, index: index, dato: dato, aaben: aaben});
     return rumCreated.save();
 }
 
-exports.updateRum = function(id, index, dato) {
-    return Rum.findOneAndUpdate({_id: id}, {index: index, dato: dato}).exec();
+exports.updateRum = function(id, paedagogInitialer, paedagogClasses, index, dato, aaben) {
+    return Rum.findOneAndUpdate({_id: id}, {paedagogInitialer: paedagogInitialer, paedagogClasses: paedagogClasses, index: index, dato: dato, aaben: aaben}).exec();
 }
 
 // collection- connections
