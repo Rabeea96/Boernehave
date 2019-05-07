@@ -62,7 +62,7 @@ function addPaedagog(paedagog) {
 //!!!!!!!!!!!!!
 function pickFunction(field) {
     if (currentAction == "placerPaedagog") {
-        placerPaedagog(field);
+        timeFieldPlaceFunction(field);
     }
     else if (currentAction == "luk-rum" || currentAction == "aaben-rum") {
         aabenLukRum(field);
@@ -124,28 +124,26 @@ function aabenLukRum(field) {
 
 // vælger en pædagog
 function placerPaedagog(element) {
-    if (currentAction == "placerPaedagog") {
-        currentAction = null;
-    }
-    else {
-        currentAction = "placerPaedagog";
-    }
-
     let number = /\d+/.exec(element.id);
     let newselect = workers[number-1];
+
+
 
     if (selectedPaedagog == newselect) {
         element.classList.remove("paedagogSelected");
         selectedPaedagog = null;
+        currentAction = null;
     }
     else if (selectedPaedagog != null) {
         removeSelection(selectedPaedagog);
         selectedPaedagog = workers[number - 1];
         element.classList.add("paedagogSelected");
+        currentAction = "placerPaedagog";
     }
     else {
         selectedPaedagog = workers[number - 1];
         element.classList.add("paedagogSelected");
+        currentAction = "placerPaedagog";
     }
     //Det udkommenteede er hvis man skal skifte onclicks
     // for (let i = 0; i < timeslots.length; i++) {
