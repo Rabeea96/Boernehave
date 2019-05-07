@@ -77,6 +77,7 @@ function pickFunction(field) {
 //!!!!!!!!!!!!!
 //!!!!!!!!!!!!!
 function aabenLukBtns(button) {
+    deselectAllPaedagoger();
     let aabenBtn = document.getElementById('aaben-rum');
     let lukBtn =  document.getElementById('luk-rum');
     aabenBtn.classList.remove('selectionButtonsSelected');
@@ -275,30 +276,7 @@ function fjernPaedagog(element) {
     }
 }
 
-// pædagogerne hentes fra databasen
-function hentPaedagoger(){
 
-    let url = "/paedagog/paedagoger";
-
-    fetch(url)
-        .then(response => {
-            if (response.status >= 400)
-                throw new Error(response.status);
-            else
-                return response.json();
-        })
-        .then(resultat => {
-
-            // henter pædagogernes navne & initialer fra databasen, opretter dem som objekter, tilføjer dem til paedagoger arrayet -
-            // samt tilføjer dem til pædagog-felterne
-            for(let i = 0; i < resultat.length; i++){
-                let element = document.querySelector("#grid-paedagog" +(i+1));
-                element.children[0].innerHTML = resultat[i].navn;
-                element.children[2].innerHTML = resultat[i].initialer;
-            }
-        })
-        .catch(fejl => console.log('Fejl: ' + fejl));
-}
 
 function removeSelection(paeda) {
     //handlebars
@@ -333,6 +311,13 @@ function fixFloat(button) {
     return divClear;
 }
 
+function deselectAllPaedagoger() {
+    for (let i = 0; i < paedagogbuttons.length; i++) {
+        console.log("deletion:" + (i+1));
+
+        paedagogbuttons[i].classList.remove("paedagogSelected");
+    }
+}
 
 
 
@@ -341,6 +326,31 @@ function fixFloat(button) {
 //ROUTING
 //!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!
+
+// pædagogerne hentes fra databasen
+function hentPaedagoger(){
+
+    let url = "/paedagog/paedagoger";
+
+    fetch(url)
+        .then(response => {
+            if (response.status >= 400)
+                throw new Error(response.status);
+            else
+                return response.json();
+        })
+        .then(resultat => {
+
+            // henter pædagogernes navne & initialer fra databasen, opretter dem som objekter, tilføjer dem til paedagoger arrayet -
+            // samt tilføjer dem til pædagog-felterne
+            for(let i = 0; i < resultat.length; i++){
+                let element = document.querySelector("#grid-paedagog" +(i+1));
+                element.children[0].innerHTML = resultat[i].navn;
+                element.children[2].innerHTML = resultat[i].initialer;
+            }
+        })
+        .catch(fejl => console.log('Fejl: ' + fejl));
+}
 
 function visForside() {
     window.location = "/";
