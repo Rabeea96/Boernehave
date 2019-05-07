@@ -61,10 +61,12 @@ function addPaedagog(paedagog) {
 //!!!!!!!!!!!!!
 //!!!!!!!!!!!!!
 function pickFunction(field) {
+    console.log("Current action: " + currentAction);
     if (currentAction == "placerPaedagog") {
         timeFieldPlaceFunction(field);
     }
     else if (currentAction == "luk-rum" || currentAction == "aaben-rum") {
+        console.log("Aaben/luk - pre funciotn");
         aabenLukRum(field);
     }
 }
@@ -109,9 +111,9 @@ function aabenLukRum(field) {
 
         // Feltet er tomt -> Åben eller luk feltet
     } else if (currentAction == "aaben-rum") {
-        field.classList.remove( 'roomClosed');
+        field.classList.remove( 'lukketRum');
     } else {
-        field.classList.add('roomClosed');
+        field.classList.add('lukketRum');
     }
 }
 
