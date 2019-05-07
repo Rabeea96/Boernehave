@@ -1,9 +1,62 @@
+let currentAction = "";
 let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
 let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
 let åbenLuk = false; // Får en værdi alt efter om åben rum eller luk rum knap er valgt
 let id_blaeksprutte;
 let initialer_blaeksprutte = "";
 let blaeksprutteFeltClicked = false;
+
+
+function pickFunction(field) {
+    if (currentAction == "placerPaedagog") {
+        placerPaedagog(field);
+    }
+    else if (currentAction == "luk-rum" || currentAction == "aaben-rum") {
+        aabenLukRum(field);
+    }
+}
+
+
+function aabenLukBtns(button) {
+    let aabenBtn = document.getElementById('aaben-rum');
+    let lukBtn =  document.getElementById('luk-rum');
+    aabenBtn.classList.remove('btnSelected');
+    lukBtn.classList.remove('btnSelected');
+
+    switch (button.id) {
+        case 'aaben-rum':
+            if (currentAction == "aaben-rum") {
+                currentAction = "";
+            } else {
+                currentAction = "aaben-rum";
+                aabenBtn.classList.add('btnSelected');
+            } break;
+        case 'luk-rum':
+            if (currentAction == "luk-rum") {
+                currentAction = "";
+            } else {
+                currentAction = "luk-rum";
+                lukBtn.classList.add('btnSelected');
+            } break;
+    }
+}
+
+
+function aabenLukRum(field) {
+
+    // Pædagog er i feltet -> Do nothing
+    if (field.children[0].innerText) {
+
+        // Feltet er tomt -> Åben eller luk feltet
+    } else if (currentAction == "aaben-rum") {
+        field.classList.remove( 'roomClosed');
+    } else {
+        field.classList.add('roomClosed');
+    }
+}
+
+
+
 
 // vælger en pædagog
 function placerePaedagog(element) {
@@ -27,52 +80,6 @@ function placerePaedagog(element) {
     element.style.opacity = "1";
 }
 
-function åbenLukKnapper(id) {
-
-    if (initialer != "") {
-        initialer = "";
-        paedagogValgt.style.opacity = '0.5';
-        paedagogValgt = "";
-
-    }
-
-    //Hvis åben eller luk ikke er valgt
-    if (åbenLuk === false) {
-        document.getElementById(id).style.border = '2px red solid';
-        åbenLuk = id;
-
-        //Hvis åben eller luk er valgt
-    } else {
-        if (åbenLuk === id) {
-            document.getElementById(id).style.border = '1px black solid';
-            åbenLuk = false;
-        } else {
-            document.getElementById(id).style.border = '2px red solid';
-            åbenLuk = id;
-            if (id === "aaben-rum") {
-                document.getElementById('luk-rum').style.border = '1px black solid';
-            } else {
-                document.getElementById('aaben-rum').style.border = '1px black solid';
-            }
-        }
-    }
-
-}
-
-function lukLokale(element) {
-
-    // Hvis der er pædagog i feltet
-    if (!(element.children[0].innerHTML === "" && element.children[1].innerHTML === "" && element.children[2].innerHTML === "")) {
-
-    } else {
-        // Hvis åben-rum eller luk-rum funktion er aktiveret/under brug
-        if (åbenLuk === "aaben-rum") {
-            element.classList.remove('lukketRum');
-        } else {
-            element.classList.add('lukketRum');
-        }
-    }
-}
 
 // placerer pædagogen på et felt
 function paedagogPlaceret(element) {
@@ -148,6 +155,7 @@ function paedagogPlaceret(element) {
         lukLokale(element);
     }
 }
+
 
 // placerer pædagogen på et felt - denne funktion virker kun på morgensamling-felterne (køkken & badeværelse)
 function paedagogPlaceret_morgensamling(element) {
