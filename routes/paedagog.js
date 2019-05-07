@@ -29,4 +29,13 @@ router.post('/paedagoger', (request, response) => {
     }
 });
 
+
+router.delete('/:id', (request, response) =>{
+    controller.deletePaedagog(request.params.id).then((paedagog) => {
+        response.send(paedagog);
+    })
+})
+
+
+
 module.exports = router;

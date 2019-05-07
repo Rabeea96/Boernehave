@@ -1,5 +1,7 @@
 "use strict";
 
+var ObjectId = require('mongoose').Types.ObjectId;
+
 const Paedagog = require('../models/Paedagog');
 const Blaeksprutte = require('../models/Blaeksprutte');
 const Rum = require('../models/Rum');
@@ -14,8 +16,20 @@ exports.getPaedagog = function(paedagogID) {
 }
 
 exports.createPaedagog = function(navn, initialer) {
-    const paedagogCreated = new Paedagog({navn : navn, initialer : initialer});
-    return paedagogCreated.save();
+    Paedagog.findOne({
+        initialer: initialer
+    }).exec().then((thereturned) => {
+        if (!thereturned) {
+            const paedagogCreated = new Paedagog({navn : navn, initialer : initialer});
+            return paedagogCreated.save();
+        }
+    })
+}
+
+
+
+exports.deletePaedagog = function(paedagogID) {
+    return Paedagog.findOne({_id: paedagogID}).deleteOne().exec();
 }
 
 // blæksprutte
