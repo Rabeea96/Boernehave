@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Præstevangen børnehaven - Admin sektion</title>
+    <link rel="stylesheet" href="admin.css"/>
+    <script src="admin_script.js" defer></script>
+
+    <style>
+        body {
+            background-color: white;
+        }
+        #opretfokuspunkter {
+            background-color: #008CBA;
+        }
+    </style>
+</head>
+<body>
+
+<!-- navigations-menu -->
+<nav>
+    <ul class="nav">
+        <a href="/admin/session">
+            <li id="vis_paedagoger">
+                Vis pædagoger
+            </li>
+        </a>
+        <a href="/admin/registrere_paedagog">
+            <li id="registrere_paedagog">
+                Registrer pædagog
+            </li>
+        </a>
+        <a href="/admin/visFokuspunkter">
+            <li id="fokuspunkter">
+                Vis fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/opretfokuspunkter">
+            <li id="opretfokuspunkter">
+                Opret fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/logout">
+            <li id="logud">
+                Log ud
+            </li>
+        </a>
+    </ul>
+</nav>
+
+<!-- formular til at oprette en fokuspunkt -->
+<div id="opret_fokuspunkt_formular" class="login-card">
+    <h2>Opret fokuspunkt</h2>
+    Fokuspunkt: <br/> <input type="text" id="fokuspunkt"> <br/><br/>
+    <input type="submit" value="Opret" id="opretButton" class="login login-submit" onclick="postFokuspunkt()"> <br/>
+    <span id="fejl_opretFokuspunkt"></span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{{#each fokuspunkter}}
+    <tr>
+        <td>
+            {{@index}}
+        </td>
+        <td>
+            {{this.fokuspunkt}}
+        </td>
+        <td>
+            <button onclick="deleteFokuspunkt('{{this._id}}') ">Slet</button>
+        </td>
+        <td>
+            <button onclick="updatingFokuspunkt('{{this._id}}', '{{this.fokuspunkt}}') ">Opdater</button>
+        </td>
+    </tr>
+{{/each}}

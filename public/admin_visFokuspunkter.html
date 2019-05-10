@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Præstevangen børnehaven - Admin sektion</title>
+    <link rel="stylesheet" href="admin.css"/>
+    <script src="handlebars-v4.0.12.js"></script>
+    <script src="admin_script.js" defer></script>
+    <style>
+        body {
+            background-color: white;
+        }
+        #fokuspunkter {
+            background-color: #008CBA;
+        }
+    </style>
+</head>
+<body>
+
+<!-- navigations-menu -->
+<nav>
+    <ul class="nav">
+        <a href="/admin/session">
+            <li id="vis_paedagoger">
+                Vis pædagoger
+            </li>
+        </a>
+        <a href="/admin/registrere_paedagog">
+            <li id="registrere_paedagog">
+                Registrer pædagog
+            </li>
+        </a>
+        <a href="/admin/visFokuspunkter">
+            <li id="fokuspunkter">
+                Vis fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/opretfokuspunkter">
+            <li id="opretfokuspunkter">
+                Opret fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/logout">
+            <li id="logud">
+                Log ud
+            </li>
+        </a>
+    </ul>
+</nav>
+
+<!-- viser alle fokuspunkter i en tabel -->
+<div id="vis_fokuspunkter_container">
+    <table id="fokuspunkter_table">
+        <tr>
+            <th>#</th>
+            <th>Fokuspunkt</th>
+            <th>Slet</th>
+            <th>Opdater</th>
+        </tr>
+    </table>
+</div>
+
+<!-- formular til at opdatere et fokuspunkt -->
+<div id="opdatere_fokuspunkt_formular" class="login-card">
+    <h2>Opdater fokuspunkt</h2>
+    Fokuspunkt: <br/> <input type="text" id="updateFokuspunkt"> <br/><br/>
+    <input type="submit" value="Opdater" id="updateButton" class="login login-submit"> <br/><br/>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{{#each paedagoger}}
+    <tr>
+        <td>
+            {{@index}}
+        </td>
+        <td>
+            {{this._id}}
+        </td>
+        <td>
+            {{this.navn}}
+        </td>
+        <td>
+            {{this.initialer}}
+        </td>
+        <td>
+            {{this.pinkode}}
+        </td>
+        <td>
+            <button onclick="deletePaedagog('{{this._id}}') ">Slet</button>
+        </td>
+        <td>
+            <button onclick="updatingPaedagog('{{this._id}}', '{{this.navn}}', '{{this.initialer}}', '{{this.pinkode}}') ">Opdater</button>
+        </td>
+    </tr>
+{{/each}}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Præstevangen børnehaven - Admin sektion</title>
+    <script src="handlebars-v4.0.12.js"></script>
+    <script src="admin_script.js" defer></script>
+    <link rel="stylesheet" href="admin.css"/>
+
+    <style>
+        body {
+            background-color: white;
+        }
+        #vis_paedagoger {
+            background-color: #008CBA;
+        }
+    </style>
+</head>
+<body>
+
+<!-- navigations-menu -->
+<nav>
+    <ul class="nav">
+        <a href="/admin/session">
+            <li id="vis_paedagoger">
+                Vis pædagoger
+            </li>
+        </a>
+        <a href="/admin/registrere_paedagog">
+            <li id="registrere_paedagog">
+                Registrer pædagog
+            </li>
+        </a>
+        <a href="/admin/visFokuspunkter">
+            <li id="fokuspunkter">
+                Vis fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/opretfokuspunkter">
+            <li id="opretfokuspunkter">
+                Opret fokuspunkter
+            </li>
+        </a>
+        <a href="/admin/logout">
+            <li id="logud">
+                Log ud
+            </li>
+        </a>
+    </ul>
+</nav>
+
+<!-- viser alle pædagoger i en tabel -->
+<div id="vis_paedagoger_container">
+    <table id="paedagoger_table">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Initialer</th>
+            <th>Pinkode</th>
+            <th>Slet</th>
+            <th>Opdater</th>
+        </tr>
+    </table>
+</div>
+
+<!-- formular til at opdatere en pædagog -->
+<div id="opdatere_paedagog_formular" class="login-card">
+    <h2>Opdater pædagog</h2>
+    Navn: <br/> <input type="text" id="updateNavn"> <br/><br/>
+    Initialer: <br/> <input type="text" id="updateInitialer"> <br/><br/>
+    Pinkode: <br/> <input type="text" id="updatePinkode"> <br/><br/>
+    <input type="submit" value="Opdater" id="updateButton" class="login login-submit"> <br/><br/>
+</div>
+
+</body>
+</html>
