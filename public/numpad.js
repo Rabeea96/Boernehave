@@ -219,7 +219,7 @@ function getPinkodeBlaeksprutte(){
 }
 
 
-openNumpad();
+// openNumpad();
 // closeNumpad();
 
 // ----------------- Skal måske flyttes til en anden klasse --------------------

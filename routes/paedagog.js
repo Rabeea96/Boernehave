@@ -20,22 +20,38 @@ router.get('/:id', (request, response) => {
 });
 
 router.post('/paedagoger', (request, response) => {
-    if(request.body.navn.length > 0 && request.body.initialer.length > 0) {
-        controller.createPaedagog(request.body.navn, request.body.initialer);
-        response.send(request.body);
-
-    } else {
-        response.send([""]);
-    }
+    let userFound = "";
+    controller.getPaedagogInitialer(request.body.initialer)
+        .then(user => {
+            if(user != null) {
+                if (user.initialer == request.body.initialer) {
+                    userFound = user;
+                    response.send({ok: false});
+                }
+            } else {
+                if (userFound == "") {
+                    controller.createPaedagog(request.body.navn, request.body.initialer, request.body.pinkode);
+                    response.send({ok: true});
+                }
+            }
+        })
+        .catch(fejl => { console.log('Fejl: ' + fejl)
+            console.log(request.body);
+        })
 });
 
+router.delete('/:id', (request, response) => {
+    controller.removePaedagog(request.params.id);
+    response.send([""]);
+});
 
-router.delete('/:id', (request, response) =>{
-    controller.deletePaedagog(request.params.id).then((paedagog) => {
-        response.send(paedagog);
-    })
-})
+router.put('/:id', (request, response) => {
 
+    controller.getPaedagog(request.params.id)
+        .then(paedagog => controller.updatePaedagog(request.params.id, request.body.navn, request.body.initialer, request.body.pinkode))
+        .catch(fejl => console.log('Fejl: ' + fejl));
 
+    response.send([request.body]);
+});
 
 module.exports = router;

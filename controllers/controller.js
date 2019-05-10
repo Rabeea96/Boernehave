@@ -1,10 +1,10 @@
 "use strict";
 
-var ObjectId = require('mongoose').Types.ObjectId;
-
 const Paedagog = require('../models/Paedagog');
 const Blaeksprutte = require('../models/Blaeksprutte');
 const Rum = require('../models/Rum');
+const Login = require('../models/Login');
+const Fokuspunkt = require('../models/Fokuspunkt');
 
 // paedagog
 exports.getPaedagoger = function() {
@@ -15,35 +15,35 @@ exports.getPaedagog = function(paedagogID) {
     return Paedagog.findOne({_id: paedagogID}).exec();
 }
 
-exports.createPaedagog = function(navn, initialer) {
-    Paedagog.findOne({
-        initialer: initialer
-    }).exec().then((thereturned) => {
-        if (!thereturned) {
-            const paedagogCreated = new Paedagog({navn : navn, initialer : initialer});
-            return paedagogCreated.save();
-        }
-    })
+exports.getPaedagogInitialer = function(paedagogInitialer) {
+    return Paedagog.findOne({initialer: paedagogInitialer}).exec();
 }
 
+exports.createPaedagog = function(navn, initialer, pinkode) {
+    const paedagogCreated = new Paedagog({navn : navn, initialer : initialer, pinkode : pinkode});
+    return paedagogCreated.save();
+}
 
+exports.removePaedagog = function(paedagogID) {
+    return Paedagog.findOneAndDelete({_id: paedagogID}).exec();
+}
 
-exports.deletePaedagog = function(paedagogID) {
-    return Paedagog.findOne({_id: paedagogID}).deleteOne().exec();
+exports.updatePaedagog = function(paedagogID, navn, initialer, pinkode) {
+    return Paedagog.findOneAndUpdate({_id: paedagogID}, {navn : navn, initialer : initialer, pinkode : pinkode}).exec();
 }
 
 // blæksprutte
 exports.getBlaeksprutte = function() {
-    return Blaeksprutte.find().exec();
+    return Blaeksprutte.find().limit(1).exec();
 }
 
-exports.createBlaeksprutte = function(navn, initialer) {
-    const blaeksprutteCreated = new Blaeksprutte({navn : navn, initialer : initialer});
+exports.createBlaeksprutte = function(navn, initialer, pinkode) {
+    const blaeksprutteCreated = new Blaeksprutte({navn : navn, initialer : initialer, pinkode : pinkode});
     return blaeksprutteCreated.save();
 }
 
-exports.updateBlaeksprutte = function(id, navn, initialer) {
-    return Blaeksprutte.findOneAndUpdate({_id: id}, {navn: navn, initialer: initialer}).exec();
+exports.updateBlaeksprutte = function(id, navn, initialer, pinkode) {
+    return Blaeksprutte.findOneAndUpdate({_id: id}, {navn: navn, initialer: initialer, pinkode: pinkode}).exec();
 }
 
 // rum
@@ -70,6 +70,33 @@ exports.createRum = function(paedagogInitialer, paedagogClasses, index, dato, aa
 
 exports.updateRum = function(id, paedagogInitialer, paedagogClasses, index, dato, aaben) {
     return Rum.findOneAndUpdate({_id: id}, {paedagogInitialer: paedagogInitialer, paedagogClasses: paedagogClasses, index: index, dato: dato, aaben: aaben}).exec();
+}
+
+// admin
+exports.getAdmin = function() {
+    return Login.findOne({level: "1"}).exec(); // level 1 betyder admin
+}
+
+// fokuspunkter
+exports.getFokuspunkter = function() {
+    return Fokuspunkt.find().exec();
+}
+
+exports.getFokuspunkt = function(fokuspunktID) {
+    return Fokuspunkt.findOne({_id: fokuspunktID}).exec();
+}
+
+exports.createFokuspunkt = function(fokuspunkt) {
+    const fokuspunktCreated = new Fokuspunkt({fokuspunkt : fokuspunkt});
+    return fokuspunktCreated.save();
+}
+
+exports.removeFokuspunkt = function(fokuspunktID) {
+    return Fokuspunkt.findOneAndDelete({_id: fokuspunktID}).exec();
+}
+
+exports.updateFokuspunkt = function(fokuspunktID, fokuspunkt) {
+    return Fokuspunkt.findOneAndUpdate({_id: fokuspunktID}, {fokuspunkt : fokuspunkt}).exec();
 }
 
 // collection- connections

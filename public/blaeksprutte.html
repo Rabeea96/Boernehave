@@ -3,490 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <title>Præstevangen børnehaven</title>
-    <link rel="stylesheet" href="grid.css"/>
     <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="numpad.css"/>
     <script src="script.js" defer></script>
-    <script src="numpad.js" defer></script>
 </head>
 <body>
 
 <!-- kalenderen -->
 <div id="grid-ydre">
     <!-- overskrifter -->
-    <div id="grid-dags-plan" class="punkter-med-kant center dagsplan">Dagsplan</div>
-    <div id="grid-stue" class="punkter-med-kant center dagsplan">Stue</div>
-    <div id="grid-multirum" class="punkter-med-kant center dagsplan">Multirum</div>
-    <div id="grid-vaerksted" class="punkter-med-kant center dagsplan">Værksted</div>
-    <div id="grid-legerum" class="punkter-med-kant center dagsplan">Legerum</div>
-    <div id="grid-krogen" class="punkter-med-kant center dagsplan">Krogen</div>
-    <div id="grid-legeplads" class="punkter-med-kant center dagsplan">Legeplads</div>
-    <div id="grid-pause" class="punkter-med-kant center dagsplan">Pause</div>
-    <div id="grid-vuggestue" class="punkter-med-kant center dagsplan">Vuggestue</div>
+    <div id="grid-dags-plan" class="punkter-med-kant center">Dagsplan</div>
+    <div id="grid-stue" class="punkter-med-kant center">Stue</div>
+    <div id="grid-multirum" class="punkter-med-kant center">Multirum</div>
+    <div id="grid-vaerksted" class="punkter-med-kant center">Værksted</div>
+    <div id="grid-legerum" class="punkter-med-kant center">Legerum</div>
+    <div id="grid-krogen" class="punkter-med-kant center">Krogen</div>
+    <div id="grid-legeplads" class="punkter-med-kant center">Legeplads</div>
+    <div id="grid-pause" class="punkter-med-kant center">Pause</div>
+    <div id="grid-vuggestue" class="punkter-med-kant center">Vuggestue</div>
 
     <!-- tidspunkter -->
-    <div id="grid-ni" class="punkter-med-kant center dagsplan">09:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 10:30</div>
-    <div id="grid-ti" class="punkter-med-kant center dagsplan">10:30 <br/>&nbsp;&nbsp;&nbsp;-<br/>11:00</div>
-    <div id="grid-elleve" class="punkter-med-kant center dagsplan">11:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 12:00</div>
-    <div id="grid-tolv" class="punkter-med-kant center dagsplan">12:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 12:30</div>
-    <div id="grid-tolv-tredive" class="punkter-med-kant center dagsplan">12:30 <br/>&nbsp;&nbsp;&nbsp;-<br/> 13:00</div>
-    <div id="grid-tretten" class="punkter-med-kant center dagsplan">13:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 14:00</div>
-    <div id="grid-fjorten" class="punkter-med-kant center dagsplan">14:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 16:00</div>
+    <div id="grid-ni" class="punkter-med-kant center">09:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 10:30</div>
+    <div id="grid-ti" class="punkter-med-kant center">10:30 <br/>&nbsp;&nbsp;&nbsp;-<br/>11:00</div>
+    <div id="grid-elleve" class="punkter-med-kant center">11:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 12:00</div>
+    <div id="grid-tolv" class="punkter-med-kant center">12:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 12:30</div>
+    <div id="grid-tolv-tredive" class="punkter-med-kant center">12:30 <br/>&nbsp;&nbsp;&nbsp;-<br/> 13:00</div>
+    <div id="grid-tretten" class="punkter-med-kant center">13:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 14:00</div>
+    <div id="grid-fjorten" class="punkter-med-kant center">14:00 <br/>&nbsp;&nbsp;&nbsp;-<br/> 16:00</div>
 
     <!-- pædagoger -->
-    <div id="grid-paedagog1" onclick="pickFunction(this)"
-         class="punkter-med-kant paedagogFarve1 center blaeksprutteVindue">
+    <div id="grid-paedagog1" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve1 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog2" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve2 center blaeksprutteVindue">
+    <div id="grid-paedagog2" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve2 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog3" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve3 center blaeksprutteVindue">
+    <div id="grid-paedagog3" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve3 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog4" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve4 center blaeksprutteVindue">
+    <div id="grid-paedagog4" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve4 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog5" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve5 center blaeksprutteVindue">
+    <div id="grid-paedagog5" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve5 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog6" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve6 center blaeksprutteVindue">
+    <div id="grid-paedagog6" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve6 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog7" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve7 center blaeksprutteVindue">
+    <div id="grid-paedagog7" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve7 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog8" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve8 center blaeksprutteVindue">
+    <div id="grid-paedagog8" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve8 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog9" onclick="placerePaedagog(this)"
-         class="punkter-med-kant paedagogFarve9 center blaeksprutteVindue">
+    <div id="grid-paedagog9" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve9 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
-    <div id="grid-paedagog10" onclick="placerPaedagog(this)"
-         class="punkter-med-kant paedagogFarve10 center blaeksprutteVindue">
+    <div id="grid-paedagog10" onclick="placerePaedagog(this)" class="punkter-med-kant paedagogFarve10 center blaeksprutteVindue">
         <span class="navn"></span> <br/>
         <span class="initialer"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 1 -->
-    <div id="grid-lokale1-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale7-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt1" class="punkter-med-kant felter blaeksprutteVindueFelt raekke1" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 2 -->
-    <div id="koekken" class="punkter-med-kant center dagsplan">
+    <div id="koekken" class="punkter-med-kant center">
         <br/><br/>
-        <span id="label-koekken" class="dagsplan">Køkken:</span>
-        <div id="grid-lokale1-tidspunkt2" class="blaeksprutteVindueFelt raekke2 dagsplan"
-             onclick="paedagogPlaceret_morgensamling(this)">
-            <span class="paedagog1 dagsplan"></span>
-        </div>
-    </div>
-
-    <div id="grid-morgensamling" class="punkter-med-kant center dagsplan">
-        Morgensamling
-    </div>
-
-    <div id="badevaerelse" class="punkter-med-kant center dagsplan">
-        <br/><br/>
-        <span id="label-badevaerelse">Badeværelse:</span>
-        <div id="grid-lokale7-tidspunkt2" class="blaeksprutteVindueFelt raekke2"
-             onclick="paedagogPlaceret_morgensamling(this)">
+        <span id="label-koekken">Køkken:</span>
+        <div id="grid-lokale1-tidspunkt2" class="blaeksprutteVindueFelt raekke2" onclick="paedagogPlaceret_morgensamling(this)">
             <span class="paedagog1"></span>
         </div>
     </div>
 
-    <div id="grid-lokale8-tidspunkt2" class="punkter-med-kant felter blaeksprutteVindueFelt raekke2 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-morgensamling" class="punkter-med-kant center">
+        Morgensamling
+    </div>
+
+    <div id="badevaerelse" class="punkter-med-kant center">
+        <br/><br/>
+        <span id="label-badevaerelse">Badeværelse:</span>
+        <div id="grid-lokale7-tidspunkt2" class="blaeksprutteVindueFelt raekke2" onclick="paedagogPlaceret_morgensamling(this)">
+            <span class="paedagog1"></span>
+        </div>
+    </div>
+
+    <div id="grid-lokale8-tidspunkt2" class="punkter-med-kant felter blaeksprutteVindueFelt raekke2" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 3 -->
-    <div id="grid-lokale1-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction
-    (this)">
+    <div id="grid-lokale7-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt3" class="punkter-med-kant felter blaeksprutteVindueFelt raekke3" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 4 -->
-    <div id="grid-lokale1-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale7-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt4" class="punkter-med-kant felter blaeksprutteVindueFelt raekke4" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 5 -->
-    <div id="grid-lokale1-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale7-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt5" class="punkter-med-kant felter blaeksprutteVindueFelt raekke5" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 6 -->
-    <div id="grid-lokale1-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale7-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt6" class="punkter-med-kant felter blaeksprutteVindueFelt raekke6" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
 
     <!-- lokaler og tidspunkt række 7 -->
-    <div id="grid-lokale1-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale1-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale2-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale2-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale3-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale3-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale4-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale4-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale5-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale5-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale6-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale6-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale7-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale7-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-    <div id="grid-lokale8-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7 dagsplan"
-         onclick="pickFunction(this)">
+    <div id="grid-lokale8-tidspunkt7" class="punkter-med-kant felter blaeksprutteVindueFelt raekke7" onclick="paedagogPlaceret(this)">
         <span class="paedagog1"></span>
         <span class="paedagog2"></span>
         <span class="paedagog3"></span>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-    <!--Numpad-->
-    <div id="grid-numpad" class="hideNumpad numpad">
-
-        <div id="message"> Log ind </div>
-
-        <div id="display-grid">
-            <div class="display display1"> </div>
-            <div class="display display2"> </div>
-            <div class="display display3"> </div>
-            <div class="display display4"> </div>
-        </div>
-
-        <div id="oneToThree">
-            <div class="number one"         onclick="digitEntered(1)">1</div>
-            <div class="number two"         onclick="digitEntered(2)">2</div>
-            <div class="number three"       onclick="digitEntered(3)">3</div>
-        </div>
-
-        <div id="fourToSix">
-            <div class="number four"        onclick="digitEntered(4)">4</div>
-            <div class="number five"        onclick="digitEntered(5)">5</div>
-            <div class="number six"         onclick="digitEntered(6)">6</div>
-        </div>
-
-        <div id="sevenToNine">
-            <div class="number seven"       onclick="digitEntered(7)">7</div>
-            <div class="number eight"       onclick="digitEntered(8)">8</div>
-            <div class="number nine"        onclick="digitEntered(9)">9</div>
-        </div>
-
-        <div id="zero" class="number zero"  onclick="digitEntered(0)">0</div>
-
-        <div id="tilbage" onclick="tilbage()">Tilbage</div>
-
-        <div id="removeADigit" class="removeADigit" onclick="slet()">Slet</div>
-    </div>
-    <!--Numpad-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- dags-dato -->
     <div id="grid-dags-dato" class="punkter-med-kant center">
@@ -496,8 +359,8 @@
     <div id="grid-knapper">
         <div id="gem-dagsplan" class="punkter-med-kant center" onclick="gemDagsplan()"><br/>Gem dagsplan</div>
         <div id="tilbage-dagsplan" class="punkter-med-kant center" onclick="visForside()"><br/>Tilbage til dagsplan</div>
-        <div id="aaben-rum" class="punkter-med-kant center" onclick="aabenLukBtns(this)"><br/>Åben rum</div>
-        <div id="luk-rum" class="punkter-med-kant center" onclick="aabenLukBtns(this)"><br/>Luk rum</div>
+        <div id="aaben-rum" class="punkter-med-kant center" onclick="åbenLukKnapper('aaben-rum')"><br/>Åben rum</div>
+        <div id="luk-rum" class="punkter-med-kant center" onclick="åbenLukKnapper('luk-rum')"><br/>Luk rum</div>
     </div>
 
     <!-- tomt mellemrum mellem lokalerne og pædagogboksene -->

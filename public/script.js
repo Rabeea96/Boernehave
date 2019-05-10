@@ -1,240 +1,166 @@
-let currentAction = "";
-let id_blaeksprutte; //refator
-let initialer_blaeksprutte = ""; //refactor
-let blaeksprutteFeltClicked = false; //refactor
-let selectedPaedagog;
+let initialer = ""; // bruges til at indsætte den valgte pædagogs initialer i flere felter
+let paedagogValgt = ""; // bruges til pædagog-feltet for den pædagog som er valgt (dvs. HTML elementet for pædagogen)
+let åbenLuk = false; // Får en værdi alt efter om åben rum eller luk rum knap er valgt
+let id_blaeksprutte;
+let pinkode_blaeksprutte;
+let initialer_blaeksprutte = "";
+let blaeksprutteFeltClicked = false;
 
-let workers = new Array(10);
+// vælger en pædagog - pædagogSelected
+function placerePaedagog(element) {
 
-let selectionButtons = document.getElementById("grid-knapper").children;
-let timeslots = document.getElementsByClassName("felter");
-// "felter" skal aendres ved integration til blaekspriuttefelter eller ngoet
-let paedagogbuttons = document.getElementsByClassName("blaeksprutteVindue");
-console.log("Antal paedagogelementer " + paedagogbuttons.length);
-
-
-//!!!!!!!!!
-//!!!!!!!!!
-//CLASS METHODS
-//!!!!!!!!!
-//!!!!!!!!!
-
-class Paedagog {
-    constructor(name, initials) {
-        this.name = name;
-        this.initials = initials;
+    //Hvis en åben/luk knap er valgt
+    if (åbenLuk) {
+        åbenLuk = false;
+        document.getElementById('aaben-rum').style.border = '1px black solid';
+        document.getElementById('luk-rum').style.border = '1px black solid';
     }
 
-    getName() {
-        return this.name;
+    // hvis der allerede er valgt en pædagog - skal den deSelectes
+    if(paedagogValgt != "") {
+        initialer = "";
+        paedagogValgt.style.opacity = "0.5";
     }
-    getInitials() {
-        return this.initials
-    }
-}
-function addPaedagog(paedagog) {
-    for (var q = 0; q < workers.length; q++) {
 
-        if(workers[q]== null) {//grid-paedagog3
-            let fieldname = "grid-paedagog" + (q+1);
-            console.log(fieldname);
-            let field = document.getElementById(fieldname);
-            console.log(field);
-            workers[q] = paedagog;
-            console.log(paedagog.getName() + " added");
-            field.getElementsByClassName('navn')[0].innerText = paedagog.getInitials();
-            field.getElementsByClassName('initialer')[0].innerText = paedagog.getName();
-            let classname = "peda" + (q+1);
-            field.classList.add(classname);
-            return paedagog;
-        }
-    }
-    console.log("No room for " + paedagog.getName() +"! Go home and have a nap :)");
-
+    // en ny pædagog bliver valgt
+    paedagogValgt = element;
+    initialer = element.children[2].innerHTML;
+    element.style.opacity = "1";
 }
 
+function åbenLukKnapper(id) {
 
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-//FUNCTION CONTROLL FUNCTIONS
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-function pickFunction(field) {
-    switch (currentAction) {
-        case 'dagsplan':
-            ; break;
 
-        case 'luk-rum':
-            aabenLukRum(field); break;
+    if (initialer != "") {
+        initialer = "";
+        paedagogValgt.style.opacity = '0.5';
+        paedagogValgt = "";
 
-        case 'aaben-rum':
-            aabenLukRum(field); break;
-
-        case 'vaelg-blaeksprutte':
-            blaeksprutteValgt(field); break;
-
-        case '':
-            //Tjek om pædagogen allerede er tjekket ind eller ej.
-               if (erTjekketInd(field)) {
-                   openNumpad("tjek-ud", field);
-               } else {
-                   openNumpad("tjek-ind", field);
-               }
     }
-}
 
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-//AABEN LUK FUNKTIONER
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-function aabenLukBtns(button) {
-    deselectAllPaedagoger();
-    let aabenBtn = document.getElementById('aaben-rum');
-    let lukBtn =  document.getElementById('luk-rum');
-    aabenBtn.classList.remove('selectionButtonsSelected');
-    lukBtn.classList.remove('selectionButtonsSelected');
-    console.log("aabenlukunc");
-    console.log(button.id);
+    //Hvis åben eller luk ikke er valgt
+    if (åbenLuk === false) {
+        document.getElementById(id).style.border = '2px red solid';
+        åbenLuk = id;
 
-    switch (button.id) {
-
-        case 'aaben-rum':
-            if (currentAction == "aaben-rum") {
-                currentAction = "";
-            } else {
-                currentAction = "aaben-rum";
-                aabenBtn.classList.add('selectionButtonsSelected');
-            } break;
-        case 'luk-rum':
-            if (currentAction == "luk-rum") {
-                currentAction = "";
-            } else {
-                currentAction = "luk-rum";
-                lukBtn.classList.add('selectionButtonsSelected');
-            } break;
-    }
-}
-
-
-function aabenLukRum(field) {
-
-    // Pædagog er i feltet -> Do nothing
-    if (field.children[0].innerText) {
-
-        // Feltet er tomt -> Åben eller luk feltet
-    } else if (currentAction == "aaben-rum") {
-        field.classList.remove( 'lukketRum');
+        //Hvis åben eller luk er valgt
     } else {
-        field.classList.add('lukketRum');
-    }
-}
-
-
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-//PAEDAGOG PLACERINGS FUNKTIONER
-//!!!!!!!!!!!!!
-//!!!!!!!!!!!!!
-
-// vælger en pædagog
-function placerPaedagog(element) {
-    let number = /\d+/.exec(element.id);
-    let newselect = workers[number-1];
-
-
-
-    if (selectedPaedagog == newselect) {
-        element.classList.remove("paedagogSelected");
-        selectedPaedagog = null;
-        currentAction = null;
-    }
-    else if (selectedPaedagog != null) {
-        removeSelection(selectedPaedagog);
-        selectedPaedagog = workers[number - 1];
-        element.classList.add("paedagogSelected");
-        currentAction = "placerPaedagog";
-    }
-    else {
-        selectedPaedagog = workers[number - 1];
-        element.classList.add("paedagogSelected");
-        currentAction = "placerPaedagog";
-    }
-    //Det udkommenteede er hvis man skal skifte onclicks
-    // for (let i = 0; i < timeslots.length; i++) {
-    //     console.log("Changing funtion on room");
-    //     timeslots[i].onclick = function() {
-    //         timeFieldPlaceFunction(timeslots[i]);
-    //     }
-    // }
-
-}
-// placerer pædagogen på et felt
-function timeFieldPlaceFunction(element) {
-    console.log("timefieldplacefunction");
-    if (!element.classList.contains('lukketRum')  && selectedPaedagog != null) {
-        //skal nok laves i handlebars
-        let fjernKnap = document.createElement("button");
-        fjernKnap.innerHTML = "Fjern";
-
-        // denne div-element bruges til at undgå float problemerne
-        let divClear = fixFloat(fjernKnap);
-        // gemmer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
-
-        let number = getIndex(selectedPaedagog) +1;
-
-        //let number = /\d+/.exec(element.id); // denne regex-expression gemmer tallet fra id'et (er id'et fx paedagog7 - gemmer den 7-tallet)
-
-        let className = "paedagogFarve" + (number); // i CSS-filen har pædagogernes felt-farver hver især en klasse (fx paedagogFarve7)
-
-        // de 3 pædagoger-pladser som er i hvert felt
-        let paedagog1 = element.children[0];
-        let paedagog2 = element.children[1];
-        let paedagog3 = element.children[2];
-
-
-        // hvis pædagogen ikke allerede er tilføjet til denne felt i kalenderen - tjekker den om en af de 3 pædagogpladser i feltet er tomt
-        if (!paedagog1.textContent.includes(selectedPaedagog.getInitials()) && !paedagog2.textContent.includes(selectedPaedagog.getInitials()) && !paedagog3.textContent.includes(selectedPaedagog.getInitials())) {
-
-            // hvis første pædagog-plads er tomt og en pædagog er valgt - tilføjes pædagogen til feltet
-            if (paedagog1.innerHTML == "" && selectedPaedagog!= null) {
-                paedagog1.innerHTML = "&nbsp;&nbsp;" + selectedPaedagog.getInitials() + "&nbsp;&nbsp;&nbsp;&nbsp;"; // initialerne for den valgte pædagog tilføjes til feltet
-                paedagog1.appendChild(fjernKnap);
-                paedagog1.appendChild(divClear);
-
-                paedagog1.classList.add(className); // tilføjer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
-
-            } else if (paedagog2.innerHTML == "" && selectedPaedagog!= null) {
-                paedagog2.innerHTML = "&nbsp;&nbsp;" + selectedPaedagog.getInitials() + "&nbsp;&nbsp;&nbsp;&nbsp;";
-                paedagog2.appendChild(fjernKnap);
-                paedagog2.appendChild(divClear);
-                paedagog2.classList.add(className);
-
-            } else if (paedagog3.innerHTML == "" && selectedPaedagog!= null) {
-                paedagog3.innerHTML = "&nbsp;&nbsp;" + selectedPaedagog.getInitials() + "&nbsp;&nbsp;&nbsp;&nbsp;";
-                paedagog3.appendChild(fjernKnap);
-                paedagog3.classList.add(className);
+        if (åbenLuk === id) {
+            document.getElementById(id).style.border = '1px black solid';
+            åbenLuk = false;
+        } else {
+            document.getElementById(id).style.border = '2px red solid';
+            åbenLuk = id;
+            if (id === "aaben-rum") {
+                document.getElementById('luk-rum').style.border = '1px black solid';
+            } else {
+                document.getElementById('aaben-rum').style.border = '1px black solid';
             }
         }
-
     }
-    //Hvis åben/luk ikke er valgt
 
 }
-//!!!!!!!!!!!!
-//!!!!!!!!!!!!
-//SPECIAL RUM
-//!!!!!!!!!!!!
-//!!!!!!!!!!!!
+
+function lukLokale(element) {
+
+    // Hvis der er pædagog i feltet
+    if (!(element.children[0].innerHTML === "" && element.children[1].innerHTML === "" && element.children[2].innerHTML === "")) {
+
+    } else {
+        // Hvis åben-rum eller luk-rum funktion er aktiveret/under brug
+        if (åbenLuk === "aaben-rum") {
+            element.classList.remove('lukketRum');
+        } else {
+            element.classList.add('lukketRum');
+        }
+    }
+}
+
+// placerer pædagogen på et felt - fieldSelected_paedagog
+function paedagogPlaceret(element) {
+    //Hvis åben/luk ikke er valgt
+    if (åbenLuk === false) {
+
+        if (element.classList.contains('lukketRum')) {
+            // Do nothing
+
+        } else {
+            // fjern-knap
+            let fjernKnap = document.createElement("button");
+            fjernKnap.innerHTML = "Fjern";
+
+            // denne div-element bruges til at undgå float problemerne
+            let divClear = document.createElement("div");
+            divClear.style.clear = "both";
+            divClear.style.height = "0 px";
+            fjernKnap.style.float = "right";
+            fjernKnap.onclick = function () {
+                fjernPaedagog(this.parentElement, this)
+            };
+
+            // gemmer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
+            let number = /\d+/.exec(paedagogValgt.id); // denne regex-expression gemmer tallet fra id'et (er id'et fx paedagog7 - gemmer den 7-tallet)
+            let index = number - 1;
+            let className = "paedagogFarve" + (index + 1); // i CSS-filen har pædagogernes felt-farver hver især en klasse (fx paedagogFarve7)
+
+            // de 3 pædagoger-pladser som er i hvert felt
+            let paedagog1 = element.children[0];
+            let paedagog2 = element.children[1];
+            let paedagog3 = element.children[2];
+
+            let classRaekke = element.classList.item(element.classList.length-1);
+            let felter_i_classRaekke = document.querySelectorAll("." + classRaekke);
+            let init_findes_i_raekken = false;
+
+            for(let i = 0; i < felter_i_classRaekke.length; i++) {
+                let p1 = felter_i_classRaekke[i].children[0];
+                let p2 = felter_i_classRaekke[i].children[1];
+                let p3 = felter_i_classRaekke[i].children[2];
+
+                if(p1.textContent.includes(initialer) || p2.textContent.includes(initialer) || p3.textContent.includes(initialer)) {
+                    init_findes_i_raekken = true;
+                    break;
+                }
+            }
+
+            // hvis pædagogen ikke allerede er tilføjet til denne felt i kalenderen - tjekker den om en af de 3 pædagogpladser i feltet er tomt
+            if (init_findes_i_raekken === false) {
+
+                // hvis første pædagog-plads er tomt og en pædagog er valgt - tilføjes pædagogen til feltet
+                if (paedagog1.innerHTML == "" && initialer != "") {
+                    paedagog1.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;"; // initialerne for den valgte pædagog tilføjes til feltet
+                    paedagog1.appendChild(fjernKnap);
+                    paedagog1.appendChild(divClear);
+                    paedagog1.classList.add(className); // tilføjer klassen som har baggrundfarven for den spedicfikke pædagog til feltet som er valgt
+
+                } else if (paedagog2.innerHTML == "" && initialer != "") {
+                    paedagog2.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    paedagog2.appendChild(fjernKnap);
+                    paedagog2.appendChild(divClear);
+                    paedagog2.classList.add(className);
+
+                } else if (paedagog3.innerHTML == "" && initialer != "") {
+                    paedagog3.innerHTML = "&nbsp;&nbsp;" + initialer + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    paedagog3.appendChild(fjernKnap);
+                    paedagog3.classList.add(className);
+                }
+            }
+        }
+    } else {
+        lukLokale(element);
+    }
+}
 
 // placerer pædagogen på et felt - denne funktion virker kun på morgensamling-felterne (køkken & badeværelse)
 function paedagogPlaceret_morgensamling(element) {
     let fjernKnap = document.createElement("button");
     fjernKnap.innerHTML = "Fjern";
-    let divClear = fixFloat(fjernKnap);
-    fjernKnap.onclick = function () {
-        fjernPaedagog(this);
-    };
+    let divClear = document.createElement("div");
+    divClear.style.clear = "both";
+    divClear.style.height = "0 px";
+    fjernKnap.style.float = "right";
+    fjernKnap.onclick = function() {fjernPaedagog(this.parentElement, this)};
+
     // tilføjer klassen som har baggrundfarven for den spedicfikke pædagog
     let number = /\d+/.exec(paedagogValgt.id);
     let index = number-1;
@@ -267,77 +193,22 @@ function paedagogPlaceret_morgensamling(element) {
     }
 }
 
-// !!!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!!
-//HJAELPEFUNCTIONER!
-// !!!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!!
-
 // fjerner en pædagog fra et felt
-// fjerner en pædagog fra et felt
-function fjernPaedagog(element) {
+function fjernPaedagog(parent, element) {
     // hvis der allerede er valgt en pædagog - skal den deSelectes
-    //fjernparent fra funktionen
-    console.log("I fjernPaedagog funtiok");
-
-    let span = element.parentElement;
-    span.innerHTML = null;
-    for (let i = 1; i <= 10; i++) {
-        let classname = "paedagogFarve" + i;
-        span.classList.remove(classname);
+    if(paedagogValgt != "") {
+        initialer = "";
+        paedagogValgt.style.opacity = "0.5";
     }
+
+    // parent er i det her tilfælde en af de 3 pædagog-pladser i feltet og element er fjern-knappen
+    parent.removeChild(element);
+    parent.innerHTML = "";
+
+    // fjerner klassen som har baggrundfarven for den spedicfikke pædagog og dermed også farven fra feltet
+    // klassen er som regel den sidste klasse og derfor er det den sidste klasse der fjernes
+    parent.classList.remove(parent.classList.item(parent.classList.length-1));
 }
-
-
-
-function removeSelection(paeda) {
-    //handlebars
-    let index =getIndex(paeda);
-
-    let fieldname = "grid-paedagog" + (index+1);
-    document.getElementById(fieldname).classList.remove('paedagogSelected');
-    let classname = "paedagogFarve" + (index+1);
-    document.getElementById(fieldname).classList.add(classname);
-    //set initialer til ""
-    selectedpaedagog = null;
-}
-
-function getIndex(paedagog) {
-    let index = workers.findIndex((elem) => {
-
-        return elem === paedagog
-    });
-    return index;
-}
-
-function fixFloat(button) {
-    let divClear = document.createElement("div"); //
-    divClear.style.clear = "both"; //skal i en css-class
-    divClear.style.height = "0 px"; //skal i en css-class
-    button.style.float = "right";
-    button.onclick = function (e) {
-        // Uden den her bliver timeFieldPlaceFunction(timeslots[i]) også kaldt
-        e.stopPropagation();
-        fjernPaedagog(this);
-    };
-    return divClear;
-}
-
-function deselectAllPaedagoger() {
-    for (let i = 0; i < paedagogbuttons.length; i++) {
-        console.log("deletion:" + (i+1));
-
-        paedagogbuttons[i].classList.remove("paedagogSelected");
-    }
-}
-
-
-
-//!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!
-//ROUTING
-//!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!
 
 // pædagogerne hentes fra databasen
 function hentPaedagoger(){
@@ -357,8 +228,10 @@ function hentPaedagoger(){
             // samt tilføjer dem til pædagog-felterne
             for(let i = 0; i < resultat.length; i++){
                 let element = document.querySelector("#grid-paedagog" +(i+1));
-                element.children[0].innerHTML = resultat[i].navn;
-                element.children[2].innerHTML = resultat[i].initialer;
+                if(element != null) {
+                    element.children[0].innerHTML = resultat[i].navn;
+                    element.children[2].innerHTML = resultat[i].initialer;
+                }
             }
         })
         .catch(fejl => console.log('Fejl: ' + fejl));
@@ -370,41 +243,90 @@ function visForside() {
 
 function visBlaeksprutteVindue() {
     window.location = "/blaeksprutte";
-    openNumpad('lav-dagsplan');
 }
 
 function vaelgeBlaeksprutte() {
     let paedagoger = document.querySelectorAll(".paedagoger");
     for(let i = 0; i < paedagoger.length; i++) {
-        //paedagoger[i].style.opacity = "0.5";
+        paedagoger[i].style.opacity = "0.5";
     }
     blaeksprutteFeltClicked = true;
 }
 
 function blaeksprutteValgt(element) {
-    let paedagoger = document.querySelectorAll(".paedagoger");
-    for(let i = 0; i < paedagoger.length; i++) {
-        //paedagoger[i].style.opacity = "1";
+    if(blaeksprutteFeltClicked == true) {
+        let paedagoger = document.querySelectorAll(".paedagoger");
+        for(let i = 0; i < paedagoger.length; i++) {
+            paedagoger[i].style.opacity = "1";
+        }
+        let navn_blaeksprutte = element.children[0].innerHTML;
+        initialer_blaeksprutte = element.children[2].innerHTML;
+
+        // pinkode for den valgte pædagog sættes på som blæksprutte-pinkode
+        let url = "/paedagog/paedagoger";
+        fetch(url)
+            .then(response => {
+                if (response.status >= 400)
+                    throw new Error(response.status);
+                else
+                    return response.json();
+            })
+            .then(resultat => {
+                if(resultat.length != 0) {
+                    initialer_blaeksprutte = element.children[2].innerHTML;
+                    for(let i = 0; i < resultat.length; i++) {
+                        if (initialer_blaeksprutte == resultat[i].initialer) {
+                            pinkode_blaeksprutte = resultat[i].pinkode;
+
+                            let blaeksprutte = document.querySelector("#blaeksprutte-felt");
+                            blaeksprutte.innerHTML = initialer_blaeksprutte;
+
+                            // hvis der ingen blæksprutte er i databasen - så oprettes en blæksprutte i databasen
+                            if(id_blaeksprutte == "" || id_blaeksprutte == undefined) {
+                                postBlaeksprutte(navn_blaeksprutte, initialer_blaeksprutte, pinkode_blaeksprutte);
+
+                                // ellers så opdateres blæksprutten i databasen
+                            } else {
+                                putBlaeksprutte(id_blaeksprutte, navn_blaeksprutte, initialer_blaeksprutte, pinkode_blaeksprutte);
+                            }
+
+                            blaeksprutteFeltClicked = false;
+
+                            initialer_blaeksprutte = "";
+
+                            break;
+                        }
+                    }
+                }
+            })
+            .catch(fejl => console.log('Fejl: ' + fejl));
     }
-    let navn_blaeksprutte = element.children[0].innerHTML;
-    initialer_blaeksprutte = element.children[2].innerHTML;
-
-    let blaeksprutte = document.querySelector("#blaeksprutte-felt");
-    blaeksprutte.innerHTML = initialer_blaeksprutte;
-
-    // hvis der ingen blæksprutte er i databasen - så oprettes en blæksprutte i databasen
-    if(id_blaeksprutte == "" || id_blaeksprutte == undefined) {
-        postBlaeksprutte(navn_blaeksprutte, initialer_blaeksprutte);
-
-        // ellers så opdateres blæksprutten i databasen
-    } else {
-        putBlaeksprutte(id_blaeksprutte, navn_blaeksprutte, initialer_blaeksprutte);
-    }
-
-    blaeksprutteFeltClicked = false;
-    initialer_blaeksprutte = "";
-    currentAction = "";
 }
+
+// function blaekspruttePinkode() {
+//     let url = "/paedagog/paedagoger";
+//     fetch(url)
+//         .then(response => {
+//             if (response.status >= 400)
+//                 throw new Error(response.status);
+//             else
+//                 return response.json();
+//         })
+//         .then(resultat => {
+//             if(resultat.length != 0) {
+//                 initialer_blaeksprutte = element.children[2].innerHTML;
+//                 console.log(initialer_blaeksprutte);
+//                 for(let i = 0; i < resultat.length; i++) {
+//                     if (initialer_blaeksprutte == resultat[i].initialer) {
+//                         pinkode_blaeksprutte = resultat[i].pinkode;
+//                         console.log("Pædagog-pinkode er sat");
+//                         break;
+//                     }
+//                 }
+//             }
+//         })
+//         .catch(fejl => console.log('Fejl: ' + fejl));
+// }
 
 function blaeksprutteId() {
     let usersUrl = "/blaeksprutte/valgt-blaeksprutte";
@@ -444,10 +366,10 @@ function hentBlaeksprutte() {
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-function postBlaeksprutte(navn, initialer) {
+function postBlaeksprutte(navn, initialer, pinkode) {
 
     let url = "/blaeksprutte";
-    let data = {navn: navn, initialer: initialer};
+    let data = {navn: navn, initialer: initialer, pinkode: pinkode};
 
     fetch(url, {
         method: "POST",
@@ -464,9 +386,9 @@ function postBlaeksprutte(navn, initialer) {
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
-function putBlaeksprutte(id, navn, initialer) {
+function putBlaeksprutte(id, navn, initialer, pinkode) {
     let url = '/blaeksprutte/valgt-blaeksprutte';
-    let data = {id: id, navn: navn, initialer: initialer };
+    let data = {id: id, navn: navn, initialer: initialer, pinkode: pinkode };
 
     fetch(url, {
         method: "PUT",
@@ -759,6 +681,28 @@ function hentRum_blaeksprutteVinduet() {
         .catch(fejl => console.log('Fejl: ' + fejl));
 }
 
+function getFokuspunkter() {
+    let fokuspunkter = document.querySelector("#grid-fokuspunkter");
+    if(fokuspunkter != null) {
+        let url = "/admin/fokuspunkter";
+        fetch(url)
+            .then(response => {
+                if (response.status >= 400)
+                    throw new Error(response.status);
+                else
+                    return response.json();
+            })
+            .then(resultat => {
+                if(resultat.length != 0) {
+                    for(let i = 0; i < resultat.length; i++) {
+                        fokuspunkter.children[i+1].innerHTML = resultat[i].fokuspunkt;
+                    }
+                }
+            })
+            .catch(fejl => console.log('Fejl: ' + fejl));
+    }
+}
+
 function getDato_tid() {
     let dato_tid = document.querySelector("#grid-dags-dato");
 
@@ -769,54 +713,20 @@ function getDato_tid() {
         ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" +
         date.getUTCFullYear() + " " +
         ("0" + (date.getUTCHours()+2)).slice(-2) + ":" +
-        ("0" + date.getUTCMinutes()).slice(-2) + ":" +
-        ("0" + date.getUTCSeconds()).slice(-2);
+        ("0" + date.getUTCMinutes()).slice(-2);
 
-    dato_tid.innerHTML = dateString;
+    if(dato_tid != null) {
+        dato_tid.innerHTML = dateString;
+    }
 
     setTimeout(getDato_tid, 500);
 }
 
-//!!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!
-//DUMMY DATA
-//!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!
+hentPaedagoger();
+blaeksprutteId();
+hentBlaeksprutte();
+getFokuspunkter();
+getDato_tid();
 
-function dummyData() {
-    let p;
-    p = new Paedagog("Madeleine", "MEKHR");
-    addPaedagog(p);
-    p = new Paedagog("Douglas", "DHR");
-    addPaedagog(p);
-    p = new Paedagog("Patrick", "PHR");
-    addPaedagog(p);
-    p = new Paedagog("Steffen", "SHR");
-    console.log(addPaedagog(p));
-    p = new Paedagog("Bertil", "BNA");
-    addPaedagog(p);
-    p = new Paedagog("Thomas", "TR");
-    addPaedagog(p);
-    p = new Paedagog("Maja", "MJ");
-    console.log(addPaedagog(p));
-    p = new Paedagog("Camilla", "CFU");
-    addPaedagog(p);
-    p = new Paedagog("Ann", "ABM");
-    addPaedagog(p);
-    p = new Paedagog("Nancy", "NS");
-    console.log(addPaedagog(p));
-    p = new Paedagog("Fry", "PJF");
-    addPaedagog(p);
-    p = new Paedagog("Leela", "TR");
-    addPaedagog(p);
-}
-
-dummyData();
-
-// hentPaedagoger();
-// blaeksprutteId();
-// hentBlaeksprutte();
-// getDato_tid();
-//
-// hentRum_indexVinduet();
-// hentRum_blaeksprutteVinduet();
+hentRum_indexVinduet();
+hentRum_blaeksprutteVinduet();

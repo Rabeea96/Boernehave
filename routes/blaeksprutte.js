@@ -17,12 +17,12 @@ router.get('/valgt-blaeksprutte', (request, response) => {
 });
 
 router.post('/', (request, response) => {
-    controller.createBlaeksprutte(request.body.navn, request.body.initialer);
+    controller.createBlaeksprutte(request.body.navn, request.body.initialer, request.body.pinkode);
     response.send(request.body);
 });
 
 router.put('/valgt-blaeksprutte', (request, response) => {
-    controller.updateBlaeksprutte(request.body.id, request.body.navn, request.body.initialer)
+    controller.updateBlaeksprutte(request.body.id, request.body.navn, request.body.initialer, request.body.pinkode)
     response.send(request.body);
 });
 

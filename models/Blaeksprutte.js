@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const blaeksprutteSchema = new Schema({
     navn : String,
-    initialer : String
+    initialer : String,
+    pinkode : String
 });
 
 module.exports = mongoose.model('blaekspruttes', blaeksprutteSchema);
