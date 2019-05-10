@@ -93,7 +93,6 @@ button {
     display: none;
 }
 
-
 .paedagogSelected {
     opacity: 0.5;
 }
@@ -101,3 +100,6 @@ button {
 .selectionButtonsSelected {
     border: 2px red solid;
 }
+
+
+

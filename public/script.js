@@ -19,7 +19,6 @@ console.log("Antal paedagogelementer " + paedagogbuttons.length);
 //!!!!!!!!!
 //!!!!!!!!!
 
-
 class Paedagog {
     constructor(name, initials) {
         this.name = name;
@@ -61,13 +60,26 @@ function addPaedagog(paedagog) {
 //!!!!!!!!!!!!!
 //!!!!!!!!!!!!!
 function pickFunction(field) {
-    console.log("Current action: " + currentAction);
-    if (currentAction == "placerPaedagog") {
-        timeFieldPlaceFunction(field);
-    }
-    else if (currentAction == "luk-rum" || currentAction == "aaben-rum") {
-        console.log("Aaben/luk - pre funciotn");
-        aabenLukRum(field);
+    switch (currentAction) {
+        case 'dagsplan':
+            ; break;
+
+        case 'luk-rum':
+            aabenLukRum(field); break;
+
+        case 'aaben-rum':
+            aabenLukRum(field); break;
+
+        case 'vaelg-blaeksprutte':
+            blaeksprutteValgt(field); break;
+
+        case '':
+            //Tjek om pædagogen allerede er tjekket ind eller ej.
+               if (erTjekketInd(field)) {
+                   openNumpad("tjek-ud", field);
+               } else {
+                   openNumpad("tjek-ind", field);
+               }
     }
 }
 
@@ -358,6 +370,7 @@ function visForside() {
 
 function visBlaeksprutteVindue() {
     window.location = "/blaeksprutte";
+    openNumpad('lav-dagsplan');
 }
 
 function vaelgeBlaeksprutte() {
@@ -369,30 +382,28 @@ function vaelgeBlaeksprutte() {
 }
 
 function blaeksprutteValgt(element) {
-    if(blaeksprutteFeltClicked == true) {
-        let paedagoger = document.querySelectorAll(".paedagoger");
-        for(let i = 0; i < paedagoger.length; i++) {
-            //paedagoger[i].style.opacity = "1";
-        }
-        let navn_blaeksprutte = element.children[0].innerHTML;
-        initialer_blaeksprutte = element.children[2].innerHTML;
-
-        let blaeksprutte = document.querySelector("#blaeksprutte-felt");
-        blaeksprutte.innerHTML = initialer_blaeksprutte;
-
-        // hvis der ingen blæksprutte er i databasen - så oprettes en blæksprutte i databasen
-        if(id_blaeksprutte == "" || id_blaeksprutte == undefined) {
-            postBlaeksprutte(navn_blaeksprutte, initialer_blaeksprutte);
-
-            // ellers så opdateres blæksprutten i databasen
-        } else {
-            putBlaeksprutte(id_blaeksprutte, navn_blaeksprutte, initialer_blaeksprutte);
-        }
-
-        blaeksprutteFeltClicked = false;
-
-        initialer_blaeksprutte = "";
+    let paedagoger = document.querySelectorAll(".paedagoger");
+    for(let i = 0; i < paedagoger.length; i++) {
+        //paedagoger[i].style.opacity = "1";
     }
+    let navn_blaeksprutte = element.children[0].innerHTML;
+    initialer_blaeksprutte = element.children[2].innerHTML;
+
+    let blaeksprutte = document.querySelector("#blaeksprutte-felt");
+    blaeksprutte.innerHTML = initialer_blaeksprutte;
+
+    // hvis der ingen blæksprutte er i databasen - så oprettes en blæksprutte i databasen
+    if(id_blaeksprutte == "" || id_blaeksprutte == undefined) {
+        postBlaeksprutte(navn_blaeksprutte, initialer_blaeksprutte);
+
+        // ellers så opdateres blæksprutten i databasen
+    } else {
+        putBlaeksprutte(id_blaeksprutte, navn_blaeksprutte, initialer_blaeksprutte);
+    }
+
+    blaeksprutteFeltClicked = false;
+    initialer_blaeksprutte = "";
+    currentAction = "";
 }
 
 function blaeksprutteId() {
