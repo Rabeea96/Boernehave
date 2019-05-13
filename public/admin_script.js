@@ -1,3 +1,26 @@
+// sætter onclick på knapperne
+function set_onclicks() {
+    let adminLoginButton = document.querySelector("#button");
+    let registerPaedagogButton = document.querySelector("#registerButton");
+    let postFokuspunktButton = document.querySelector("#opretButton");
+
+    if(adminLoginButton != null) {
+        adminLoginButton.onclick = function () {
+            admin_login();
+        }
+    }
+    if(registerPaedagogButton != null) {
+        registerPaedagogButton.onclick = function () {
+            postPaedagog();
+        }
+    }
+    if(postFokuspunktButton != null) {
+        postFokuspunktButton.onclick = function () {
+            postFokuspunkt();
+        }
+    }
+}
+
 // login
 async function admin_login(){
     const navn = document.querySelector('#navn');
@@ -95,8 +118,8 @@ function updatingPaedagog(id, navn, initialer, tjekInd_kode) {
     let opdatere_pinkode = document.querySelector("#updatePinkode");
     let opdatere_knappen = document.querySelector("#updateButton");
 
-    vis_paedagoger_container.style = "display: none;";
-    opdaterePaedagog_formular.style = "display: block;";
+    vis_paedagoger_container.classList.add('usynlig');
+    opdaterePaedagog_formular.classList.remove('usynlig');
 
     opdatere_navn.value = navn;
     opdatere_initialer.value = initialer;
@@ -128,18 +151,6 @@ function putPaedagog(id, navn, initialer, pinkode){
             location.reload();
         })
         .catch(fejl => console.log('Fejl: ' + fejl));
-
-    let opdaterePaedagog_formular = document.querySelector("#opdatere_paedagog_formular");
-    let vis_paedagoger_container = document.querySelector("#vis_paedagoger_container");
-    let opdatere_navn = document.querySelector("#updateNavn");
-    let opdatere_initialer = document.querySelector("#updateInitialer");
-    let opdatere_tjekindkode = document.querySelector("#updateTjekind_kode");
-
-    opdatere_navn.value = '';
-    opdatere_initialer.value = '';
-    opdatere_tjekindkode.value = '';
-    opdaterePaedagog_formular.style = "display: none;";
-    vis_paedagoger_container.style = "display: block;";
 }
 
 // fokuspunkter
@@ -214,8 +225,8 @@ function updatingFokuspunkt(id, fokuspunkt) {
     let opdatere_fokuspunkt = document.querySelector("#updateFokuspunkt");
     let opdatere_knappen = document.querySelector("#updateButton");
 
-    vis_fokuspunkter_container.style = "display: none;";
-    opdatereFokuspunkt_formular.style = "display: block;";
+    vis_fokuspunkter_container.classList.add('usynlig');
+    opdatereFokuspunkt_formular.classList.remove('usynlig');
 
     opdatere_fokuspunkt.value = fokuspunkt;
     opdatere_knappen.onclick = function () {
@@ -245,16 +256,8 @@ function putFokuspunkt(id, fokuspunkt){
             location.reload();
         })
         .catch(fejl => console.log('Fejl: ' + fejl));
-
-    let opdatereFokuspunkt_formular = document.querySelector("#opdatere_fokuspunkt_formular");
-    let vis_fokuspunkter_container = document.querySelector("#vis_fokuspunkter_container");
-    let opdatere_fokuspunkt = document.querySelector("#updateFokuspunkt");
-
-    opdatere_fokuspunkt.value = '';
-    opdatereFokuspunkt_formular.style = "display: none;";
-    vis_fokuspunkter_container.style = "display: block;";
 }
 
-
+set_onclicks();
 hentFokuspunkter_adminVinduet();
 hentPaedagoger_adminVinduet();

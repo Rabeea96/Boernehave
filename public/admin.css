@@ -1,8 +1,29 @@
+/* importerer Roboto skrifttypen fra google */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
+/* body elementerne for de forskelige admin-undersider */
 body {
-    background-color: darkgrey;
     font-family: 'Roboto', sans-serif;
+}
+
+#admin {
+    background-color: darkgrey;
+}
+
+#admin_session #vis_paedagoger {
+    background-color: #008CBA;
+}
+
+#admin_registrerePaedagog #registrere_paedagog {
+    background-color: #008CBA;
+}
+
+#admin_visFokuspunter #fokuspunkter {
+    background-color: #008CBA;
+}
+
+#admin_opretFokuspunkter #opretfokuspunkter {
+    background-color: #008CBA;
 }
 
 /* login-formular */
@@ -161,6 +182,7 @@ ul.nav a li {
     padding: 10px 20px;
 }
 
-#opdatere_paedagog_formular, #opdatere_fokuspunkt_formular {
+/* skjuler html-elementer */
+.usynlig {
     display: none;
 }

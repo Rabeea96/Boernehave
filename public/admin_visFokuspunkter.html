@@ -6,16 +6,8 @@
     <link rel="stylesheet" href="admin.css"/>
     <script src="handlebars-v4.0.12.js"></script>
     <script src="admin_script.js" defer></script>
-    <style>
-        body {
-            background-color: white;
-        }
-        #fokuspunkter {
-            background-color: #008CBA;
-        }
-    </style>
 </head>
-<body>
+<body id="admin_visFokuspunter">
 
 <!-- navigations-menu -->
 <nav>
@@ -61,7 +53,7 @@
 </div>
 
 <!-- formular til at opdatere et fokuspunkt -->
-<div id="opdatere_fokuspunkt_formular" class="login-card">
+<div id="opdatere_fokuspunkt_formular" class="login-card usynlig">
     <h2>Opdater fokuspunkt</h2>
     Fokuspunkt: <br/> <input type="text" id="updateFokuspunkt"> <br/><br/>
     <input type="submit" value="Opdater" id="updateButton" class="login login-submit"> <br/><br/>

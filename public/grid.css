@@ -1,3 +1,4 @@
+/* indeholder hele kalenderen */
 #grid-ydre {
     border: 1px solid red;
     width: 1024px;
@@ -22,7 +23,6 @@
     grid-auto-columns: 1fr; /* gør at kolonnerne får den samme bredde */
     grid-template-rows: 0.4fr 1fr 1fr 0.1fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-
 
 /* overskrifter */
 #grid-dags-plan {
@@ -131,6 +131,17 @@
     grid-area: paedagog10;
 }
 
+/* viser grid lines */
+.punkter-med-kant {
+    border: 1px black solid;
+}
+
+/* felter/rum i kalenderen */
+.felter {
+    background-color: white;
+}
+
+/* lokale og tidspunkt- felter for række 1 */
 #grid-lokale1-tidspunkt1 {
     grid-area: lokale1-tidspunkt1;
 }
@@ -163,7 +174,6 @@
     grid-area: lokale8-tidspunkt1;
 }
 
-
 /* lokale og tidspunkt- felter for række 2 */
 #koekken {
     grid-area: lokale1-tidspunkt2;
@@ -188,12 +198,11 @@
 #grid-lokale1-tidspunkt2 {
     background-color: white;
     border:1px solid black;
-    width:109px;
+    width:112px;
     height:25px;
     float:right;
     margin-right:80px;
 }
-
 
 #label-koekken {
     margin-left:80px;
@@ -202,7 +211,7 @@
 #grid-lokale7-tidspunkt2 {
     background-color: white;
     border:1px solid black;
-    width:109px;
+    width:112px;
     height:25px;
     float:right;
     margin-right:80px;
@@ -407,6 +416,16 @@
     border-bottom: 1px solid black;
 }
 
+#blaeksprutte-felt {
+    background-color: white;
+    border:1px solid black;
+    width:109px;
+    height:25px;
+    float:right;
+    margin-right: 45px;
+    margin-top: 10px;
+}
+
 #aendre-dagsplan {
     grid-area: aendre_plan;
 }
@@ -456,12 +475,10 @@
 #aaben-rum {
     grid-area: aaben_rum;
 }
-/* tomt mellemrum */
+
+/* tomt mellemrum mellem lokalerne og pædagogboksene */
 #mellemrum {
     grid-area: mellemrum;
     border: 1px black solid;
     background-color: darkgrey;
-}
-#grid-dags-dato {
-    grid-area: dags-dato;
 }

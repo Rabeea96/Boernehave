@@ -98,17 +98,3 @@ exports.removeFokuspunkt = function(fokuspunktID) {
 exports.updateFokuspunkt = function(fokuspunktID, fokuspunkt) {
     return Fokuspunkt.findOneAndUpdate({_id: fokuspunktID}, {fokuspunkt : fokuspunkt}).exec();
 }
-
-// collection- connections
-exports.connectPaedagogTilRum = function(paedagog, rum) {
-    paedagog.rum = rum;
-    rum.paedagoger.push(paedagog);
-    return Promise.all([rum.save(), paedagog.save()]);
-}
-
-exports.addPaedagogTilRum = async function(paedagogInit, rumIndex) {
-    let paedagog = await Paedagog.findOne({initialer: paedagogInit}).exec();
-    let rum = await Rum.findOne({index: rumIndex}).exec();
-    await connectPaedagogTilRum(paedagog, rum);
-    console.log('addPaedagogTilRum: %s <-> %s', paedagogInit, rumIndex);
-}

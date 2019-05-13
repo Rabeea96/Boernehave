@@ -5,17 +5,8 @@
     <title>Præstevangen børnehaven - Admin sektion</title>
     <link rel="stylesheet" href="admin.css"/>
     <script src="admin_script.js" defer></script>
-
-    <style>
-        body {
-            background-color: white;
-        }
-        #registrere_paedagog {
-            background-color: #008CBA;
-        }
-    </style>
 </head>
-<body>
+<body id="admin_registrerePaedagog">
 
 <!-- navigations-menu -->
 <nav>
@@ -54,7 +45,7 @@
     Navn: <br/> <input type="text" id="navn_registerPaedagog"> <br/><br/>
     Initialer: <br/> <input type="text" id="initialer_registerPaedagog"> <br/><br/>
     Pinkode: <br/> <input type="text" id="pinkode_registerPaedagog"> <br/><br/>
-    <input type="submit" value="Opret" id="registerButton" class="login login-submit" onclick="postPaedagog()"> <br/>
+    <input type="submit" value="Opret" id="registerButton" class="login login-submit"> <br/>
     <span id="fejl_registerPaedagog"></span>
 </div>
 

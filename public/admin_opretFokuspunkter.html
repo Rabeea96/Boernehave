@@ -5,17 +5,8 @@
     <title>Præstevangen børnehaven - Admin sektion</title>
     <link rel="stylesheet" href="admin.css"/>
     <script src="admin_script.js" defer></script>
-
-    <style>
-        body {
-            background-color: white;
-        }
-        #opretfokuspunkter {
-            background-color: #008CBA;
-        }
-    </style>
 </head>
-<body>
+<body id="admin_opretFokuspunkter">
 
 <!-- navigations-menu -->
 <nav>
@@ -52,7 +43,7 @@
 <div id="opret_fokuspunkt_formular" class="login-card">
     <h2>Opret fokuspunkt</h2>
     Fokuspunkt: <br/> <input type="text" id="fokuspunkt"> <br/><br/>
-    <input type="submit" value="Opret" id="opretButton" class="login login-submit" onclick="postFokuspunkt()"> <br/>
+    <input type="submit" value="Opret" id="opretButton" class="login login-submit"> <br/>
     <span id="fejl_opretFokuspunkt"></span>
 </div>
 
