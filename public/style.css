@@ -65,11 +65,6 @@ button {
     display: none;
 }
 
-/* dato og tidspunkt */
-#grid-dags-dato {
-    grid-area: dags-dato;
-}
-
 /* når knapperne åben rum & lukket rum bliver valgt */
 .selectionButtonsSelected {
     border: 2px red solid;
@@ -89,4 +84,33 @@ button {
 /* en knap der bliver brugt til at fjerne en pædagog fra kalenderen i blæksprutte-vinduet */
 .fjernKnapFloat {
     float: right;
+}
+
+/* en div element der viser at dagsplanen gemmes når der klikkes på gem dagsplan */
+#dagsplanGemt {
+    z-index: 2;
+    background-color: dimgrey;
+    color: #ededed;
+    padding: 42px 48px;
+    width: 350px;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    text-align: center;
+    border-radius: 20px;
+    border: 3px groove #fff;
+    font-size: 33px;
+}
+
+/* denne klasse til gennemsigtighed bliver brugt til dagsplan div der fader ud */
+.opacity {
+    opacity: 1;
+}
+
+/* design for pædagoger der har tjekket ind */
+.check-in {
+    display: block;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px #000000;
 }

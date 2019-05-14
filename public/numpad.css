@@ -1,4 +1,215 @@
+#grid-ydre_numpad {
+    border: 1px solid red;
+    width: 1024px;
+    height: 768px;
+    margin: 0px auto;
+    padding: 0px;
+    background-color: lightgrey;
+    display: grid;
+    grid-template-areas:
+        "dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato dags-dato"
+        "top_left top_left top_left top_left paedagog1 paedagog2 paedagog3 paedagog4 paedagog5"
+        "top_left top_left top_left top_left paedagog6 paedagog7 paedagog8 paedagog9 paedagog10"
+        "mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum mellemrum"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad"
+        "numpad numpad numpad numpad numpad numpad numpad numpad numpad";
+    grid-auto-columns: 1fr; /* gør at kolonnerne får den samme bredde */
+    grid-template-rows: 0.4fr 1fr 1fr 0.1fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+/* pædagoger */
+#grid-paedagog1 {
+    grid-area: paedagog1;
+}
+
+#grid-paedagog2 {
+    grid-area: paedagog2;
+}
+
+#grid-paedagog3 {
+    grid-area: paedagog3;
+}
+
+#grid-paedagog4 {
+    grid-area: paedagog4;
+}
+
+#grid-paedagog5 {
+    grid-area: paedagog5;
+}
+
+#grid-paedagog6 {
+    grid-area: paedagog6;
+}
+
+#grid-paedagog7 {
+    grid-area: paedagog7;
+}
+
+#grid-paedagog8 {
+    grid-area: paedagog8;
+}
+
+#grid-paedagog9 {
+    grid-area: paedagog9;
+}
+
+#grid-paedagog10 {
+    grid-area: paedagog10;
+}
+
+/* viser grid lines */
+.punkter-med-kant {
+    border: 1px black solid;
+}
+
+/* felter/rum i kalenderen */
+.felter {
+    background-color: white;
+}
+
+/* tomt mellemrum mellem lokalerne og pædagogboksene */
+#mellemrum {
+    grid-area: mellemrum;
+    border: 1px black solid;
+    background-color: darkgrey;
+}
+
+/* dato og tidspunkt */
+#grid-dags-dato {
+    grid-area: dags-dato;
+}
+
+/* top_left i index-vinduet */
+#grid-fokuspunkter-og-blaeksprutte {
+    grid-area: top_left;
+    display: grid;
+    grid-template-areas:
+            "fokuspunkter fokuspunkter fokuspunkter"
+            "blaeksprutte_tekst blaeksprutte_navn aendre_plan";
+    grid-auto-columns: 1fr;
+    grid-template-rows: 1.4fr 0.6fr;
+}
+
+#blaeksprutte-tekstfelt {
+    grid-area: blaeksprutte_tekst;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#blaeksprutte-tekstfelt div {
+    margin-left: 50px;
+    margin-top: 12px;
+}
+
+#blaeksprutte-boks {
+    grid-area: blaeksprutte_navn;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#blaeksprutte-felt {
+    background-color: white;
+    border:1px solid black;
+    width:109px;
+    height:25px;
+    float:right;
+    margin-right: 45px;
+    margin-top: 10px;
+}
+
+#aendre-dagsplan {
+    grid-area: aendre_plan;
+}
+
+#aendre-dagsplan div {
+    margin-top: 12px;
+}
+
+#grid-fokuspunkter {
+    grid-area: fokuspunkter;
+}
+
+#grid-fokuspunkter h3 {
+    text-align: center;
+    line-height: 5px;
+}
+
+#grid-fokuspunkter div {
+    overflow: auto;
+    width:420px;
+    height: 20px;
+    margin-left: 20px;
+}
+
+/* centrerer tekst */
+.center {
+    text-align: center;
+}
+
+/* pædagog-farver */
+.paedagogFarve1 {
+    background-color: pink;
+}
+
+.paedagogFarve2 {
+    background-color: green;
+}
+
+.paedagogFarve3 {
+    background-color: yellow;
+}
+
+.paedagogFarve4 {
+    background-color: orange;
+}
+
+.paedagogFarve5 {
+    background-color: aquamarine;
+}
+
+.paedagogFarve6 {
+    background-color: lightblue;
+}
+
+.paedagogFarve7 {
+    background-color: lightgrey;
+}
+
+.paedagogFarve8 {
+    background-color: cyan;
+}
+
+.paedagogFarve9 {
+    background-color: gold;
+}
+
+.paedagogFarve10 {
+    background-color: lemonchiffon;
+}
+
+.paedagogDeselected {
+    opacity: 0.5;
+}
+
+/* gør html-elementer usynlige */
+.usynlig {
+    display: none;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
 #grid-numpad {
+    display: grid;
     grid-area: numpad;
     grid-template-areas:
             ". message ."
@@ -7,7 +218,7 @@
             ". fourToSix ."
             ". sevenToNine ."
             "tilbage zero removeADigit";
-    grid-auto-columns: 0.7fr 1fr 0.7fr;
+    grid-auto-columns: 1fr 1fr 1fr;
     grid-auto-rows: 0.7fr 0.8fr 0.9fr 0.9fr 0.9fr 1fr;
     background-color: #6ca6a8;
 }
@@ -28,14 +239,13 @@
             "display1 display2 display3 display4";
     grid-auto-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 20px;
-    margin: 0px 25px;
+    margin: 0px 110px;
     padding-left: 5px;
     width: 357px;
 
 }
     .display1 {
         grid-area: display1;
-        /*width: 200px;*/
     }
     .display2 {
         grid-area: display2;
@@ -109,11 +319,7 @@
     grid-area: zero;
     align-content: center;
     margin: 6px auto;
-
 }
-    .zero {
-
-    }
 
 
 #tilbage {

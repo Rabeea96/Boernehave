@@ -1,11 +1,28 @@
 const controller = require("../controllers/controller");
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 router.get('/paedagoger', (request, response) => {
     controller.getPaedagoger()
         .then(val => response.json(val))
         .catch(fejl => console.log('Fejl: ' + fejl));
+});
+
+router.get('/numpad', (request, response) => {
+    response.sendFile(path.join(__dirname, '../public', 'numpad.html'));
+});
+
+router.get('/numpad.css', (request, response) => {
+    response.sendFile(path.join(__dirname, '../public', 'numpad.css'));
+});
+
+router.get('/numpad.js', (request, response) => {
+    response.sendFile(path.join(__dirname, '../public', 'numpad.js'));
+});
+
+router.get('/script.js', (request, response) => {
+    response.sendFile(path.join(__dirname, '../public', 'script.js'));
 });
 
 router.get('/:id', (request, response) => {

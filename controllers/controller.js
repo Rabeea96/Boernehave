@@ -5,6 +5,7 @@ const Blaeksprutte = require('../models/Blaeksprutte');
 const Rum = require('../models/Rum');
 const Login = require('../models/Login');
 const Fokuspunkt = require('../models/Fokuspunkt');
+const Checkin = require('../models/Check-in');
 
 // paedagog
 exports.getPaedagoger = function() {
@@ -97,4 +98,30 @@ exports.removeFokuspunkt = function(fokuspunktID) {
 
 exports.updateFokuspunkt = function(fokuspunktID, fokuspunkt) {
     return Fokuspunkt.findOneAndUpdate({_id: fokuspunktID}, {fokuspunkt : fokuspunkt}).exec();
+}
+
+// tjekind & tjekud
+exports.getCheckins = function() {
+    return Checkin.find().exec();
+}
+
+exports.getCheckins_dagsdato = function() {
+
+    // henter dato i formatet DD-MM-ÅÅÅÅ
+    let dato = new Date();
+    let datoString =
+        ("0" + dato.getUTCDate()).slice(-2) + "-" +
+        ("0" + (dato.getUTCMonth()+1)).slice(-2) + "-" +
+        dato.getUTCFullYear();
+
+    return Checkin.find({dato: datoString}).exec();
+}
+
+exports.createCheckin = function(paedagogInitialer, dato, tjekketInd) {
+    const checkinCreated = new Checkin({paedagogInitialer : paedagogInitialer, dato : dato, tjekketInd : tjekketInd});
+    return checkinCreated.save();
+}
+
+exports.updateCheckin = function(checkinID, paedagogInitialer, dato, tjekketInd) {
+    return Checkin.findOneAndUpdate({_id: checkinID}, {paedagogInitialer : paedagogInitialer, dato : dato, tjekketInd : tjekketInd}).exec();
 }

@@ -482,3 +482,8 @@
     border: 1px black solid;
     background-color: darkgrey;
 }
+
+/* dato og tidspunkt */
+#grid-dags-dato {
+    grid-area: dags-dato;
+}

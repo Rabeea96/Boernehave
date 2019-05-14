@@ -26,9 +26,11 @@ mongoose.connect(config.atlasMongoDB + '/Boernehaven_Praestevangen?retryWrites=t
 const paedagogRouter = require('./routes/paedagog');
 const blaeksprutteRouter = require('./routes/blaeksprutte');
 const adminRouter = require('./routes/admin');
+const checkinRouter = require('./routes/check-in');
 app.use('/paedagog', paedagogRouter);
 app.use('/blaeksprutte', blaeksprutteRouter);
 app.use('/admin', adminRouter);
+app.use('/checkin', checkinRouter);
 
 // START THE SERVER
 const port = process.env.PORT || config.localPort;
