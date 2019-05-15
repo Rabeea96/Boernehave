@@ -1,5 +1,6 @@
-let url = "/blaeksprutte/rum";
-let data = { paedagogInitialer: "(EK)", index: "7", dato: "02-05-2019" };
+const fetch = require('node-fetch');
+let url = "http://localhost:8080/admin/opretAdmin";
+let data = { navn: "Admin", password: "Admin", level: "1" };
 
 fetch(url, {
     method: "POST",

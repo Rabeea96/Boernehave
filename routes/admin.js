@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 router.get('/', (request, response) => {
     const navn = request.session.navn;
@@ -93,20 +94,40 @@ router.get('/:id', (request, response) => {
         })
 });
 
+router.post('/opretAdmin', (request, response) => {
+    const saltRounds = 10;
+    const brugernavn = request.body.navn;
+    const myPlaintextPassword = request.body.password;
+    const level = request.body.level;
+
+
+    // auto-genererer salt og hash
+    bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+
+        // gemmer brugernavn, password-hash samt level i databasen
+        controller.createAdmin(brugernavn, hash, level);
+    });
+    response.send([request.body]);
+});
+
 router.post('/login', (request, response) => {
-    const {navn, password} = request.body;
+    const brugernavn = request.body.navn
+    const myPlaintextPassword = request.body.password;
 
     controller.getAdmin()
         .then(user => {
-            let userFound = "";
-                if(user.navn == navn && user.password == password) {
-                    userFound = user;
-                    request.session.navn = navn;
+            let hash = user.passwordHash;
+
+            // tjekker om den indtastede password's hash svarer til password-hashet i databasen - derefter tjekker den også om brugernavnet stemmer
+            bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+                // res == true hvis den indtastede password's hash svarer til password-hashet i databasen
+                if(user.brugernavn == brugernavn && res == true) {
+                    request.session.navn = brugernavn;
                     response.send({ok: true});
+                } else {
+                    response.send({ok: false});
                 }
-            if(userFound == "") {
-                response.send({ok: false});
-            }
+            });
         })
         .catch(fejl => console.log('Fejl: ' + fejl));
 });

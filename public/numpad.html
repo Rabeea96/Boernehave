@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Præstevangen børnehaven</title>
+    <link rel="stylesheet" href="numpad.css"/>
+    <script src="numpad.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+<div id="grid-ydre_numpad">
+
+    <!-- pædagoger -->
+    <div id="grid-paedagog1" class="punkter-med-kant paedagogFarve1 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog2" class="punkter-med-kant paedagogFarve2 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog3" class="punkter-med-kant paedagogFarve3 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog4" class="punkter-med-kant paedagogFarve4 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog5" class="punkter-med-kant paedagogFarve5 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog6" class="punkter-med-kant paedagogFarve6 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog7" class="punkter-med-kant paedagogFarve7 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog8" class="punkter-med-kant paedagogFarve8 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog9" class="punkter-med-kant paedagogFarve9 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+    <div id="grid-paedagog10" class="punkter-med-kant paedagogFarve10 center paedagogDeselected">
+        <span class="navn"></span> <br/>
+        <span class="initialer"></span>
+    </div>
+
+    <!-- fokus-punkter -->
+    <div id="grid-fokuspunkter-og-blaeksprutte">
+        <div id="grid-fokuspunkter" class="punkter-med-kant">
+            <h3>Fokuspunkter:</h3>
+            <div id="fokuspunkt1"></div>
+            <div id="fokuspunkt2"></div>
+            <div id="fokuspunkt3"></div>
+        </div>
+        <div id="blaeksprutte-tekstfelt" class="center">
+            <div>Blæksprutte:</div>
+        </div>
+        <div id="blaeksprutte-boks"class="center">
+            <div id="blaeksprutte-felt"></div>
+        </div>
+        <div id="aendre-dagsplan" class="punkter-med-kant center">
+            <div>Ændre dagsplan</div>
+        </div>
+    </div>
+
+    <!-- dags-dato -->
+    <div id="grid-dags-dato" class="punkter-med-kant center">
+    </div>
+
+    <!-- tomt mellemrum mellem lokalerne og pædagogboksene -->
+    <div id="mellemrum"> <br/></div>
+
+    <!--Numpad-->
+    <div id="grid-numpad" class="usynlig">
+
+        <div id="message"> Log ind </div>
+
+        <div id="display-grid">
+            <div class="display display1"> </div>
+            <div class="display display2"> </div>
+            <div class="display display3"> </div>
+            <div class="display display4"> </div>
+        </div>
+
+        <div id="oneToThree">
+            <div class="number one">1</div>
+            <div class="number two">2</div>
+            <div class="number three">3</div>
+        </div>
+
+        <div id="fourToSix">
+            <div class="number four">4</div>
+            <div class="number five">5</div>
+            <div class="number six">6</div>
+        </div>
+
+        <div id="sevenToNine">
+            <div class="number seven">7</div>
+            <div class="number eight">8</div>
+            <div class="number nine">9</div>
+        </div>
+
+        <div id="zero" class="number zero">0</div>
+
+        <div id="tilbage">Tilbage</div>
+
+        <div id="removeADigit" class="removeADigit">Slet</div>
+    </div>
+</div>
+
+</body>
+</html>

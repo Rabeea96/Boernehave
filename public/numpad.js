@@ -118,6 +118,7 @@ const NUMPAD = {
 
             case 'aendre-dagsplan':
                 if (NUMPAD.password.join('') == NUMPAD.blaekspruttePinkode) {
+                    SCRIPT.setCookie("blaeksprutteCookie", "Blaeksprutte", 1, "/blaeksprutte");
                     NUMPAD.confirmPassword('correctPassword');
                     NUMPAD.closeNumpad();
                     // Funktion der giver lov til at ændre dagsplanen

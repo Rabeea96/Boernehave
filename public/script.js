@@ -321,6 +321,7 @@ const SCRIPT = {
     },
 
     navigateToFrontpage : function() {
+        SCRIPT.deleteCookie("blaeksprutteCookie", "/blaeksprutte");
         window.location = "/";
     },
 
@@ -671,6 +672,7 @@ const SCRIPT = {
                 }
             })
             .catch(fejl => console.log('Fejl: ' + fejl));
+        SCRIPT.deleteCookie("blaeksprutteCookie", "/blaeksprutte");
     },
 
     postRum : function(paedagogInitArray, paedagogClassArray, index, dato, aaben) {
@@ -944,8 +946,19 @@ const SCRIPT = {
                 }
             })
             .catch(fejl => console.log('Fejl: ' + fejl));
+    },
+
+    setCookie : function(cookieName, cookieValue, expiresInNumberOfDays, path) {
+        let d = new Date();
+        d.setTime(d.getTime() + (expiresInNumberOfDays*24*60*60*1000));
+        let expires = "expires=" + d.toGMTString();
+        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=" + path;
+    },
+
+    deleteCookie : function(cookieName, path) {
+        document.cookie = cookieName +'=; Path=' + path + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
-}
+};
 
 SCRIPT.set_onclicks();
 SCRIPT.getPaedagoger();

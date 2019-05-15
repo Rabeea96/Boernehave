@@ -5,12 +5,15 @@ const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(session({secret: 'hemmelig', saveUninitialized: true, resave: true}));
+app.use(cookieParser());
 
 // MONGODB & MONGOOSE SETUP
 const mongoose = require('mongoose');

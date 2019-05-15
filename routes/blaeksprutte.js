@@ -2,10 +2,18 @@ const controller = require("../controllers/controller");
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // blæksprutte relaterede endpoints
 router.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, '../public', 'blaeksprutte.html'));
+// hvis man prøver at gå ind på blæksprutte-vinduet, tjekker den om et blæksprutte-cookie er sat - hvis den ikke er sat navigerer den tilbage til forsiden
+// blæksprutte-cookie bliver sat når man klikker på "Ændre dagsplan" og indtaster blæksprutte-pinkoden
+// blæksprutte-cookie bliver fjernet igen når man klikker på "Tilbage til dagsplan" eller når blæksprutten gemmer dagsplanen
+    if(request.cookies['blaeksprutteCookie'] == "Blaeksprutte") {
+        response.sendFile(path.join(__dirname, '../public', 'blaeksprutte.html'));
+    } else {
+        response.redirect('/');
+    }
 });
 
 router.get('/valgt-blaeksprutte', (request, response) => {

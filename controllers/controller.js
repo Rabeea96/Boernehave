@@ -78,6 +78,11 @@ exports.getAdmin = function() {
     return Login.findOne({level: "1"}).exec(); // level 1 betyder admin
 }
 
+exports.createAdmin = function(brugernavn, passwordHash, level) {
+    const adminCreated = new Login({brugernavn : brugernavn, passwordHash : passwordHash, level : level});
+    return adminCreated.save();
+}
+
 // fokuspunkter
 exports.getFokuspunkter = function() {
     return Fokuspunkt.find().exec();
