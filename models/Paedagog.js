@@ -6,6 +6,7 @@ const paedagogSchema = new Schema({
     navn : String,
     initialer : String,
     pinkode : String
-});
+    },
+    { collection: 'Paedagoger' });
 
-module.exports = mongoose.model('paedagogers', paedagogSchema);
+module.exports = mongoose.model('Paedagoger', paedagogSchema);

@@ -7,6 +7,7 @@ describe('Accept Test', function () {
 
     // tjekker en pædagog ind i systemet
     it('Tjek-ind (test-case 1)', async function () {
+        this.timeout(3000);
         const response = await request(app)
             .post('/checkin')
             .send({
@@ -28,6 +29,7 @@ describe('Accept Test', function () {
 
     // tjekker en pædagog ud af systemet - kræver selvfølgelig at pædagogen er tjekket ind i forvejen
     it('Tjek-ud (test-case 2)', async function () {
+        this.timeout(3000);
         const response1 = await request(app)
             .get('/checkin');
         const checkins1 = response1.body;

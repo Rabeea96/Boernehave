@@ -8,6 +8,7 @@ const rumSchema = new Schema({
     index : String,
     dato : String,
     aaben : String
-});
+    },
+    { collection: 'Rum' });
 
-module.exports = mongoose.model('rums', rumSchema);
+module.exports = mongoose.model('Rum', rumSchema);

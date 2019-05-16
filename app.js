@@ -17,6 +17,7 @@ app.use(cookieParser());
 
 // MONGODB & MONGOOSE SETUP
 const mongoose = require('mongoose');
+// når man opdaterer i MongoDB med funktionen findOneAndUpdate() vil den ikke længere vise en advarsel om at funktionen er forældet
 mongoose.set('useFindAndModify', false);
 mongoose.Promise = Promise;
 

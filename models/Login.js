@@ -5,6 +5,7 @@ const loginSchema = new Schema({
     brugernavn : String,
     passwordHash : String,
     level : String
-});
+    },
+    { collection: 'Login' });
 
-module.exports = mongoose.model('logins', loginSchema);
+module.exports = mongoose.model('Login', loginSchema);

@@ -12,6 +12,7 @@ describe('Unit Test', function () {
 
     // tester om det der er på forsiden er i HTML
     it("Forside i HTML (testcase 1)", async function () {
+        this.timeout(3000);
         await request(app)
             .get('/')
             .expect(200)
@@ -20,6 +21,7 @@ describe('Unit Test', function () {
 
     // tester om det der er i endpoint '/paedagog/paedagoger' er i JSON-format
     it("Endpoint '/paedagog/paedagoger' i JSON-format (testcase 2)", async function () {
+        this.timeout(3000);
         await request(app)
             .get('/paedagog/paedagoger')
             .expect(200)
@@ -29,6 +31,7 @@ describe('Unit Test', function () {
     // tester om brugeren bliver postet rigtigt med en besked: Pædagogen er nu registreret i systemet!
     // tester også om den sidste bruger matcher de indtastede data dvs. den bruger som man har postet/registreret
     it("Registrer en pædagog (testcase 3)", async function () {
+        this.timeout(3000);
         const response = await request(app)
             .post('/paedagog/paedagoger')
             .send({
@@ -50,6 +53,7 @@ describe('Unit Test', function () {
 
     // tester om der vises en fejl hvis man prøver at registrer en pædagog med samme initialer - med en besked: Pædagog-initialerne findes i forvejen!
     it("Registrer en pædagog med samme initialer (testcase 4)", async function () {
+        this.timeout(3000);
         const response = await request(app)
             .post('/paedagog/paedagoger')
             .send({
@@ -64,6 +68,7 @@ describe('Unit Test', function () {
     // tester om brugeren bliver opdateret rigtigt med en besked: Pædagogen er nu opdateret i systemet!
     // tester også at antal pædagoger stadig er den samme
     it("Opdater en pædagog (testcase 5)", async function () {
+        this.timeout(3000);
         const response1 = await request(app)
             .get('/paedagog/paedagoger');
         const users1 = response1.body;
@@ -90,6 +95,7 @@ describe('Unit Test', function () {
     // tester om den sidste bruger matcher de indtastede data dvs. den bruger som man har opdateret.
     // i testcase 3 hed brugeren som var blevet postet "Rabeea M" - i testcase 5 er navnet blevet opdateret til "Rabeea Moussa"
     it("Pædagog er opdateret (testcase 6)", async function () {
+        this.timeout(3000);
         const response = await request(app)
             .get('/paedagog/paedagoger');
         const users = response.body;
@@ -103,6 +109,7 @@ describe('Unit Test', function () {
     // tester om brugeren bliver slettet rigtigt med en besked: Pædagogen er nu slettet fra systemet!
     // tester også om at antal pædagoger ikke stadig er den samme samt at den sidste pædagogs navn ikke ikke længere er den samme efter sletningen
     it("Sletter en pædagog (testcase 7)", async function () {
+        this.timeout(3000);
         const response1 = await request(app)
             .get('/paedagog/paedagoger');
         const users1 = response1.body;
