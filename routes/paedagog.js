@@ -43,12 +43,12 @@ router.post('/paedagoger', (request, response) => {
             if(user != null) {
                 if (user.initialer == request.body.initialer) {
                     userFound = user;
-                    response.send({ok: false});
+                    response.send({message: "Pædagog-initialerne findes i forvejen"});
                 }
             } else {
                 if (userFound == "") {
                     controller.createPaedagog(request.body.navn, request.body.initialer, request.body.pinkode);
-                    response.send({ok: true});
+                    response.send({message: "Pædagogen er nu registreret i systemet!"});
                 }
             }
         })
@@ -59,7 +59,7 @@ router.post('/paedagoger', (request, response) => {
 
 router.delete('/:id', (request, response) => {
     controller.removePaedagog(request.params.id);
-    response.send([""]);
+    response.send({message: "Pædagogen er nu slettet fra systemet!"});
 });
 
 router.put('/:id', (request, response) => {
@@ -68,7 +68,7 @@ router.put('/:id', (request, response) => {
         .then(paedagog => controller.updatePaedagog(request.params.id, request.body.navn, request.body.initialer, request.body.pinkode))
         .catch(fejl => console.log('Fejl: ' + fejl));
 
-    response.send([request.body]);
+    response.send({message: "Pædagogen er nu opdateret i systemet!"});
 });
 
 module.exports = router;

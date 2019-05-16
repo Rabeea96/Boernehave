@@ -16,12 +16,12 @@ router.get('/dagsdato', (request, response) => {
 
 router.post('/', (request, response) => {
     controller.createCheckin(request.body.paedagogInitialer, request.body.dato, request.body.tjekketInd);
-    response.send(request.body);
+    response.send({message :'Pædagogen er nu tjekket ind i systemet!'});
 });
 
 router.put('/dagsdato', (request, response) => {
     controller.updateCheckin(request.body.id, request.body.paedagogInitialer, request.body.dato, request.body.tjekketInd);
-    response.send(request.body);
+    response.send({message :'Pædagogen er nu tjekket ud af systemet!'});
 });
 
 module.exports = router;

@@ -17,6 +17,7 @@ app.use(cookieParser());
 
 // MONGODB & MONGOOSE SETUP
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 mongoose.Promise = Promise;
 
 // lokal mongoDB database - database-navn: Boernehaven_Praestevangen

@@ -80,7 +80,7 @@ async function postPaedagog() {
                 headers: {'Content-Type': 'application/json'}
             });
             const svar = await resultat.json();
-            if (svar.ok == true)
+            if (svar.message == "Pædagogen er nu registreret i systemet!")
                 window.location = "/admin/session";
             else {
                 fejl.innerHTML = "Initialer eksisterer i forvejen";

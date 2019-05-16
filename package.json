@@ -10,6 +10,8 @@
     "mongoose": "^5.5.4",
     "morgan": "^1.9.1",
     "node-fetch": "^2.4.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   }
 }
