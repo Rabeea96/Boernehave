@@ -6,6 +6,7 @@ const NUMPAD = {
     paedagog : "",
     blaekspruttePinkode : "",
     paedagog_checkin_ID : "",
+    currentAction : "",
 
     // sætter onclick på knapperne samt div-elementer der fungerer som knapper
     set_onclicks : function() {
@@ -118,10 +119,9 @@ const NUMPAD = {
 
             case 'aendre-dagsplan':
                 if (NUMPAD.password.join('') == NUMPAD.blaekspruttePinkode) {
+                    // Funktion der giver lov til at ændre dagsplanen
                     SCRIPT.setCookie("blaeksprutteCookie", "Blaeksprutte", 1, "/blaeksprutte");
                     NUMPAD.confirmPassword('correctPassword');
-                    NUMPAD.closeNumpad();
-                    // Funktion der giver lov til at ændre dagsplanen
                 } else {
                     NUMPAD.confirmPassword('incorrectPassword');
                 }
@@ -129,9 +129,9 @@ const NUMPAD = {
 
             case 'tjek-ind':
                 if (NUMPAD.password.join('') == NUMPAD.pinkode) {
-                    NUMPAD.confirmPassword('correctPassword');
                     // Funktion der tjekker pædagogen ind
                     SCRIPT.tjekInd(NUMPAD.paedagog.children[2].innerHTML, SCRIPT.getDato().datoString);
+                    NUMPAD.confirmPassword('correctPassword');
                 } else {
                     NUMPAD.confirmPassword('incorrectPassword');
                 }
@@ -166,7 +166,9 @@ const NUMPAD = {
 
         // Luk numpad hvis korrekt pinkode
         if (result == 'correctPassword') {
-            setTimeout(NUMPAD.closeNumpad, 1500);
+            if(NUMPAD.currentAction != "tjek-ind") {
+                setTimeout(NUMPAD.closeNumpad, 1500);
+            }
 
         } else {
             // Gør displayet rødt (forkert pinkode)

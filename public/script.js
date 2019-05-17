@@ -449,17 +449,18 @@ const SCRIPT = {
                     return response.json();
             })
             .then(resultat => {
-                console.log(resultat);
-                if(resultat.length < 1) {
+                console.log('Tjekket ind / Tjekket ud: ' + resultat);
+                if(resultat.length == 0 || resultat == undefined || (resultat[0].paedagogInitialer == paedagogInitialer && resultat.length == 1)) {
+                    SCRIPT.blaeksprutteFeltClicked = true;
                     for(let i = 0; i < 10; i++) {
                         let gridPaedagog = document.querySelector("#grid-paedagog" + (i + 1));
                         if(gridPaedagog.children[2].innerHTML == paedagogInitialer) {
-                            SCRIPT.blaeksprutteFeltClicked = true;
                             SCRIPT.blaeksprutteChanged(gridPaedagog);
                             break;
                         }
                     }
                 }
+                setTimeout(SCRIPT.navigateToFrontpage, 1500);
             })
             .catch(fejl => console.log('Fejl: ' + fejl));
     },
